@@ -15,9 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'admin@admin',
-        ]);
+        $this->call(RolePermissionSeeder::class);
+        $this->call(UserSeeder::class);
+
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'admin@admin',
+        // ]);
     }
 }

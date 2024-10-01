@@ -1,0 +1,30 @@
+{
+    "sourceFile": "bootstrap/app.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1727764966127,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1727765012325,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n         commands: __DIR__ . '/../routes/console.php',\n         health: '/up',\n     )\n     ->withMiddleware(function (Middleware $middleware) {\n-        'role' => \\Spatie\\Permission\\Middlewares\\RoleMiddleware::class,\n+        'role' => RoleMiddleware::class,\n     })\n     ->withExceptions(function (Exceptions $exceptions) {\n         //\n     })->create();\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727765095964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n         commands: __DIR__ . '/../routes/console.php',\n         health: '/up',\n     )\n     ->withMiddleware(function (Middleware $middleware) {\n-        'role' => RoleMiddleware::class,\n+        //\n     })\n     ->withExceptions(function (Exceptions $exceptions) {\n         //\n     })->create();\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727765164784,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,13 @@\n         commands: __DIR__ . '/../routes/console.php',\n         health: '/up',\n     )\n     ->withMiddleware(function (Middleware $middleware) {\n-        //\n+        $middleware->alias([\n+            'role' => \\Spatie\\Permission\\Middleware\\RoleMiddleware::class,\n+            'permission' => \\Spatie\\Permission\\Middleware\\PermissionMiddleware::class,\n+            'role_or_permission' => \\Spatie\\Permission\\Middleware\\RoleOrPermissionMiddleware::class,\n+        ]);\n     })\n     ->withExceptions(function (Exceptions $exceptions) {\n         //\n     })->create();\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1727764966127,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Foundation\\Application;\nuse Illuminate\\Foundation\\Configuration\\Exceptions;\nuse Illuminate\\Foundation\\Configuration\\Middleware;\n\nreturn Application::configure(basePath: dirname(__DIR__))\n    ->withRouting(\n        web: __DIR__ . '/../routes/web.php',\n        commands: __DIR__ . '/../routes/console.php',\n        health: '/up',\n    )\n    ->withMiddleware(function (Middleware $middleware) {\n        'role' => \\Spatie\\Permission\\Middlewares\\RoleMiddleware::class,\n    })\n    ->withExceptions(function (Exceptions $exceptions) {\n        //\n    })->create();"
+        }
+    ]
+}

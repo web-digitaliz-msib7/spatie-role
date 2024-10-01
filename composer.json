@@ -14,7 +14,8 @@
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
         "opcodesio/log-viewer": "^3.11",
-        "php-flasher/flasher-notyf-laravel": "^2.0"
+        "php-flasher/flasher-notyf-laravel": "^2.0",
+        "spatie/laravel-permission": "^6.9"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",

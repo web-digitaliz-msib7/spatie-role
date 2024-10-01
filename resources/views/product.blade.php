@@ -26,7 +26,7 @@
                     <!-- card body -->
                     <div class="card-body">
                         <div>
-                            <h1 class="fw-semi-bold text-center">Dashboard</h1>
+                            <h1 class="fw-semi-bold text-center">Product</h1>
                         </div>
                     </div>
                 </div>

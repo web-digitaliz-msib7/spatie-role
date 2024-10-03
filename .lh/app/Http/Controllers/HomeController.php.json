@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1727923732285,
@@ -15,6 +15,14 @@
                 },
                 {
                     "date": 1727927616336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,12 +20,12 @@\n      * Show the application dashboard.\n      *\n      * @return \\Illuminate\\Contracts\\Support\\Renderable\n      */\n-    public function index()\n-    {\n-        return view('admin.dashboard');\n-    }\n+    // public function index()\n+    // {\n+    //     return view('admin.dashboard');\n+    // }\n     public function userDashboard()\n     {\n         return view('user.dashboard');  // Tampilan dashboard untuk user\n     }\n"
+                },
+                {
+                    "date": 1727934472357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,12 +20,12 @@\n      * Show the application dashboard.\n      *\n      * @return \\Illuminate\\Contracts\\Support\\Renderable\n      */\n-    // public function index()\n-    // {\n-    //     return view('admin.dashboard');\n-    // }\n+    public function index()\n+    {\n+        return view('admin.dashboard');\n+    }\n     public function userDashboard()\n     {\n         return view('user.dashboard');  // Tampilan dashboard untuk user\n     }\n"
+                },
+                {
+                    "date": 1727934480982,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,12 +20,12 @@\n      * Show the application dashboard.\n      *\n      * @return \\Illuminate\\Contracts\\Support\\Renderable\n      */\n-    public function index()\n-    {\n-        return view('admin.dashboard');\n-    }\n+    // public function index()\n+    // {\n+    //     return view('admin.dashboard');\n+    // }\n     public function userDashboard()\n     {\n         return view('user.dashboard');  // Tampilan dashboard untuk user\n     }\n"
                 }
             ],

@@ -26,20 +26,21 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = '/';
+    protected $redirectTo = '/';
 
-    protected function redirectTo()
-    {
-        // $user = Auth::user();
+    // protected function redirectTo()
+    // {
+    //     $user = Auth::user();
 
-        // if ($user->hasRole('super-admin') || $user->hasRole('admin')) {
-        //     return '/admin-dashboard';  // Halaman dashboard admin
-        // } elseif ($user->hasRole('user')) {
-        //     return '/user-dashboard';  // Halaman dashboard user
-        // }
+    //     if ($user->hasRole('super-admin') || $user->hasRole('admin')) {
+    //         return route('admin.dashboard');  // Halaman dashboard admin
+    //     } elseif ($user->hasRole('user')) {
+    //         return route('user.dashboard');  // Halaman dashboard user
+    //     }
 
-        return '/';  // Jika tidak ada role yang sesuai
-    }
+    //     return '/';  // Jika tidak ada role yang sesuai
+    // }
+
 
     /**
      * Create a new controller instance.

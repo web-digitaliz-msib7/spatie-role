@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\PermissionRegistrar;
 
 // Handling untuk jika route tidak ditemukan
 Route::fallback(function () {
@@ -55,11 +58,27 @@ Route::middleware(['auth', 'role:admin|super-admin'])->prefix('admin')->group(fu
 
 // Route khusus super-admin dengan prefix /admin
 Route::middleware(['auth', 'role:super-admin'])->prefix('admin')->group(function () {
-    Route::get('/admin-accounts', function () {
-        return view('admin.account');
-    })->name('admin.accounts')->middleware('can:show-admin-account');
+    // Route::get('/admin-accounts', [SuperAdminController::class, 'index'])
+    // ->name('admin.accounts');
+    // // ->middleware('can:show-admin-account');
 
-    Route::get('/permissions', function () {
-        return view('admin.permission');
-    })->name('admin.permissions')->middleware('can:show-permission');
+    Route::get('admin-accounts', [SuperAdminController::class, 'index'])->name('admin.accounts');
+    // // create akun
+    Route::get('/admin-accounts/create', [SuperAdminController::class, 'create'])
+    ->name('admin.accounts.create');
+
+    Route::post('/admin-accounts/store', [SuperAdminController::class, 'store'])
+    ->name('admin.accounts.store');
+
+    // edit akun
+    Route::get('/admin-accounts/edit/{id}', [SuperAdminController::class, 'edit'])->name('admin.accounts.edit');
+    // delete akun
+    Route::delete('/admin-accounts/destroy/{id}', [SuperAdminController::class, 'destroy'])->name('admin.accounts.destroy');
+
+    Route::get('permissions', [PermissionController::class, 'index'])->name('admin.permissions');
+    Route::get('permissions/create', [PermissionController::class, 'create'])->name('admin.permissions.create');
+    Route::post('permissions/store', [PermissionController::class, 'store'])->name('admin.permission.store');
+    Route::get('permissions/edit/{id}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
+    Route::put('permissions/update/{id}', [PermissionController::class, 'update'])->name('admin.permission.update');
+    Route::delete('permissions/destroy/{id}', [PermissionController::class, 'destroy'])->name('admin.permission.destroy');
 });

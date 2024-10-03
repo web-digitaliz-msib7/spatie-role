@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1727764966127,
@@ -20,6 +20,14 @@
                 {
                     "date": 1727765164784,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,13 @@\n         commands: __DIR__ . '/../routes/console.php',\n         health: '/up',\n     )\n     ->withMiddleware(function (Middleware $middleware) {\n-        //\n+        $middleware->alias([\n+            'role' => \\Spatie\\Permission\\Middleware\\RoleMiddleware::class,\n+            'permission' => \\Spatie\\Permission\\Middleware\\PermissionMiddleware::class,\n+            'role_or_permission' => \\Spatie\\Permission\\Middleware\\RoleOrPermissionMiddleware::class,\n+        ]);\n     })\n     ->withExceptions(function (Exceptions $exceptions) {\n         //\n     })->create();\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727932763165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,6 +17,8 @@\n             'role_or_permission' => \\Spatie\\Permission\\Middleware\\RoleOrPermissionMiddleware::class,\n         ]);\n     })\n     ->withExceptions(function (Exceptions $exceptions) {\n-        //\n+        $exceptions->map(AuthorizationException::class, function ($request, AuthorizationException $exception) {\n+            return response()->view('errors.403', [], Response::HTTP_FORBIDDEN);\n+        });\n     })->create();\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727932777728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,10 @@\n \n use Illuminate\\Foundation\\Application;\n use Illuminate\\Foundation\\Configuration\\Exceptions;\n use Illuminate\\Foundation\\Configuration\\Middleware;\n+use Symfony\\Component\\HttpFoundation\\Response;\n+use Illuminate\\Auth\\Access\\AuthorizationException;\n \n return Application::configure(basePath: dirname(__DIR__))\n     ->withRouting(\n         web: __DIR__ . '/../routes/web.php',\n"
                 }
             ],
             "date": 1727764966127,

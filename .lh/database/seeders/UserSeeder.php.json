@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1727755294250,
@@ -24,6 +24,10 @@
                 {
                     "date": 1727755391415,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,6 +27,11 @@\n             'name' => 'fulan',\n             'email' => 'fulan@gmail.com',\n             'password' => bcrypt('12345678'),\n         ]);\n+\n+\n+        $superAdmin->assignRole('super-admin');\n+        $admin->assignRole('admin');\n+        $user->assignRole('user');\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727931657307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,19 +15,19 @@\n     {\n         $superAdmin = User::create([\n             'name' => 'super-admin',\n             'email' => 'super-admin@gmail.com',\n-            'password' => bcrypt('12345678'),\n+            'password' => bcrypt('awdawdawd'),\n         ]);\n         $admin = User::create([\n             'name' => 'admin',\n             'email' => 'admin@gmail.com',\n-            'password' => bcrypt('12345678'),\n+            'password' => bcrypt('awdawdawd'),\n         ]);\n         $user = User::create([\n             'name' => 'fulan',\n             'email' => 'fulan@gmail.com',\n-            'password' => bcrypt('12345678'),\n+            'password' => bcrypt('awdawdawd'),\n         ]);\n \n \n         $superAdmin->assignRole('super-admin');\n"
                 }
             ],
             "date": 1727755294250,

@@ -13,6 +13,8 @@ return [
          * `Spatie\Permission\Contracts\Permission` contract.
          */
 
+        'user' => App\Models\User::class,
+
         'permission' => Spatie\Permission\Models\Permission::class,
 
         /*

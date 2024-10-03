@@ -1,0 +1,26 @@
+{
+    "sourceFile": "app/Http/Controllers/Auth/LoginController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1727924305946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1727924321612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace App\\Http\\Controllers\\Auth;\n \n use App\\Http\\Controllers\\Controller;\n use Illuminate\\Foundation\\Auth\\AuthenticatesUsers;\n+use Illuminate\\Support\\Facades\\Auth;\n \n class LoginController extends Controller\n {\n     /*\n"
+                },
+                {
+                    "date": 1727924957102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,15 +29,15 @@\n     // protected $redirectTo = '/';\n \n     protected function redirectTo()\n     {\n-        $user = Auth::user();\n+        // $user = Auth::user();\n \n-        if ($user->hasRole('super-admin') || $user->hasRole('admin')) {\n-            return '/admin-dashboard';  // Halaman dashboard admin\n-        } elseif ($user->hasRole('user')) {\n-            return '/user-dashboard';  // Halaman dashboard user\n-        }\n+        // if ($user->hasRole('super-admin') || $user->hasRole('admin')) {\n+        //     return '/admin-dashboard';  // Halaman dashboard admin\n+        // } elseif ($user->hasRole('user')) {\n+        //     return '/user-dashboard';  // Halaman dashboard user\n+        // }\n \n         return '/';  // Jika tidak ada role yang sesuai\n     }\n \n"
+                }
+            ],
+            "date": 1727924305945,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Auth;\n\nuse App\\Http\\Controllers\\Controller;\nuse Illuminate\\Foundation\\Auth\\AuthenticatesUsers;\n\nclass LoginController extends Controller\n{\n    /*\n    |--------------------------------------------------------------------------\n    | Login Controller\n    |--------------------------------------------------------------------------\n    |\n    | This controller handles authenticating users for the application and\n    | redirecting them to your home screen. The controller uses a trait\n    | to conveniently provide its functionality to your applications.\n    |\n    */\n\n    use AuthenticatesUsers;\n\n    /**\n     * Where to redirect users after login.\n     *\n     * @var string\n     */\n    // protected $redirectTo = '/';\n\n    protected function redirectTo()\n    {\n        $user = Auth::user();\n\n        if ($user->hasRole('super-admin') || $user->hasRole('admin')) {\n            return '/admin-dashboard';  // Halaman dashboard admin\n        } elseif ($user->hasRole('user')) {\n            return '/user-dashboard';  // Halaman dashboard user\n        }\n\n        return '/';  // Jika tidak ada role yang sesuai\n    }\n\n    /**\n     * Create a new controller instance.\n     *\n     * @return void\n     */\n    public function __construct()\n    {\n        $this->middleware('guest')->except('logout');\n        $this->middleware('auth')->only('logout');\n    }\n}"
+        }
+    ]
+}

@@ -80,4 +80,5 @@ class SuperAdminController extends Controller
         $id->delete();
         return redirect()->route('admin.accounts')->with('success', 'Account deleted successfully');
     }
+
 }

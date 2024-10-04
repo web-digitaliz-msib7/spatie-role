@@ -6,6 +6,7 @@ use App\Http\Requests\PermissonRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
@@ -69,5 +70,22 @@ class PermissionController extends Controller
     {
         $id->delete();
         return redirect()->route('admin.permissions')->with('success', 'Permission deleted successfully');
+    }
+
+    public function role()
+    {
+        $roles = Role::all();
+        return view('admin.permission.roles-permission', compact('roles'));
+    }
+
+    public function rolePermissionEdit(Role $id)
+    {
+        $permissions = Permission::all();
+        return view('admin.permission.role-permission-edit', compact('id', 'permissions'));
+    }
+
+    public function rolePermissionUpdate()
+    {
+        
     }
 }

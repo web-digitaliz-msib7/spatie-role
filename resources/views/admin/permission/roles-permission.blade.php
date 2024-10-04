@@ -8,39 +8,38 @@
                     <!-- card body -->
                     <div class="card-body">
                         <div>
-                            <h1 class="fw-semi-bold text-center">Dashboard Account</h1>
+                            <h1 class="fw-semi-bold text-center">Dashboard permission Role</h1>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
+
         <div class="table-responsive pt-10">
-            <div class="pb-5">
-                <a href="{{ route('admin.accounts.create') }}" class="btn btn-primary"> Create akun</a>
-            </div>
             <table class="table text-nowrap mb-0">
                 <thead class="table-light">
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th>role</th>
+                        <th>permission</th>
                         <th>action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @dd($users); --}}
-                    @foreach ($users as $user)
+                    @foreach ($roles as $role)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->roles->first()->name }}</td>
+                            <td>{{ $role->name }}</td>
                             <td>
-                                <a href="{{ route('admin.accounts.edit', $user->id) }}" class="btn btn-primary">edit</a>
+                                @foreach ($role->permissions as $permission)
+                                    <span class="badge bg-success">{{ $permission->name }}</span>
+                                @endforeach
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.permissions.role.edit', $role->id) }}" class="btn btn-primary">Edit</a>
 
-                                <form action="{{ route('admin.accounts.destroy', $user->id) }}" method="post">
+                                <form action="" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">delet</button>
@@ -48,9 +47,9 @@
                             </td>
                         </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>
+
     </div>
 </x-app-layout>

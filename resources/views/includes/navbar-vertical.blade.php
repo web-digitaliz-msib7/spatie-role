@@ -52,6 +52,12 @@
                     <i data-feather="lock" class="nav-icon icon-xs me-2"></i> Permission
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link has-arrow" href="{{ route('admin.permissions.role') }}">
+                    <i data-feather="lock" class="nav-icon icon-xs me-2"></i> Role Permission
+                </a>
+            </li>
             @endrole
         </ul>
     </div>

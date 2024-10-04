@@ -81,4 +81,9 @@ Route::middleware(['auth', 'role:super-admin'])->prefix('admin')->group(function
     Route::get('permissions/edit/{id}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
     Route::put('permissions/update/{id}', [PermissionController::class, 'update'])->name('admin.permission.update');
     Route::delete('permissions/destroy/{id}', [PermissionController::class, 'destroy'])->name('admin.permission.destroy');
+
+
+    Route::get('role-permissions', [PermissionController::class, 'role'])->name('admin.permissions.role');
+    Route::get('role-permissions/edit/{id}', [PermissionController::class, 'rolePermissionEdit'])->name('admin.permissions.role.edit');
+    Route::put('role-permissions/update/{id}', [PermissionController::class, 'rolePermissionUpdate'])->name('admin.permissions.role.update');
 });

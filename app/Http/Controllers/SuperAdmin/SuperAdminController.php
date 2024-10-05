@@ -14,7 +14,8 @@ class SuperAdminController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles')->get();
+        $users = User::role('admin')->get();
+        // dd($users);
         return view('admin.account.index', compact('users'));
     }
 

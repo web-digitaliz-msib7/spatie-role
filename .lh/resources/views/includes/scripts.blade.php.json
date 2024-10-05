@@ -1,0 +1,22 @@
+{
+    "sourceFile": "resources/views/includes/scripts.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1728091268096,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1728091284143,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,11 +8,7 @@\n <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"\n     integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\">\n </script>\n \n-<script>\n-    function confirmDelete() {\n-        return confirm('Are you sure you want to delete this account?');\n-    }\n-</script>\n \n \n+\n"
+                }
+            ],
+            "date": 1728091268096,
+            "name": "Commit-0",
+            "content": "<link rel=\"stylesheet\" href=\"{{ asset('assets') }}\">\n\n<script src=\"{{ asset('assets') }}/js/feather.js\"></script>\n<script src=\"{{ asset('assets') }}/js/main.js\"></script>\n<script src=\"{{ asset('assets') }}/js/sidebarMenu.js\"></script>\n\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"\n    integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\">\n</script>\n\n<script>\n    function confirmDelete() {\n        return confirm('Are you sure you want to delete this account?');\n    }\n</script>\n\n\n"
+        }
+    ]
+}

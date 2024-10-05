@@ -21,17 +21,17 @@ Route::get('/log-viewer', function () {
 })->name('log-viewer');
 
 // Route untuk dashboard tergantung role
-Route::get('/', function () {
-    $user = Auth::user();
+// Route::get('/', function () {
+//     $user = Auth::user();
 
-    if ($user->hasRole('super-admin') || $user->hasRole('admin')) {
-        return redirect()->route('admin.dashboard');
-    } elseif ($user->hasRole('user')) {
-        return redirect()->route('user.dashboard');
-    }
+//     if ($user->hasRole('super-admin') || $user->hasRole('admin')) {
+//         return redirect()->route('admin.dashboard');
+//     } elseif ($user->hasRole('user')) {
+//         return redirect()->route('user.dashboard');
+//     }
 
-    return redirect('/login');  // Jika tidak ada role yang sesuai, arahkan ke login
-})->middleware('auth')->name('home');
+//     return redirect('/login');  // Jika tidak ada role yang sesuai, arahkan ke login
+// })->middleware('auth')->name('home');
 
 // Route untuk user dashboard
 Route::middleware(['auth', 'role:user'])->group(function () {

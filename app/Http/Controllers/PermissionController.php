@@ -75,13 +75,13 @@ class PermissionController extends Controller
     public function role()
     {
         $roles = Role::all();
-        return view('admin.permission.roles-permission', compact('roles'));
+        return view('admin.role-permission.roles-permission', compact('roles'));
     }
 
     public function rolePermissionEdit(Role $id)
     {
         $permissions = Permission::all();
-        return view('admin.permission.role-permission-edit', compact('id', 'permissions'));
+        return view('admin.role-permission.role-permission-edit', compact('id', 'permissions'));
     }
 
     public function rolePermissionUpdate()

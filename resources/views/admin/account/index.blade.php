@@ -8,7 +8,7 @@
                     <!-- card body -->
                     <div class="card-body">
                         <div>
-                            <h1 class="fw-semi-bold text-center">Dashboard Account</h1>
+                            <h1 class="fw-semi-bold text-center">Dashboard Admin Account</h1>
                         </div>
                     </div>
 
@@ -36,14 +36,19 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->roles->first()->name }}</td>
+                            {{-- <td>{{ $user->roles->first()->name }}</td> --}}
                             <td>
-                                <a href="{{ route('admin.accounts.edit', $user->id) }}" class="btn btn-primary">edit</a>
-
-                                <form action="{{ route('admin.accounts.destroy', $user->id) }}" method="post">
+                                @foreach ($user->roles as $role)
+                                    <span class="badge bg-success">{{ $role->name }}</span>
+                                @endforeach
+                            </td>
+                            <td class="d-flex justify-content-center">
+                                <a href="{{ route('admin.accounts.edit', $user->id) }}" class="btn btn-primary mx-2">Edit</a>
+                            
+                                <form action="{{ route('admin.accounts.destroy', $user->id) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">delet</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>
                             </td>
                         </tr>

@@ -36,13 +36,13 @@
                                     <span class="badge bg-success">{{ $permission->name }}</span>
                                 @endforeach
                             </td>
-                            <td>
-                                <a href="{{ route('admin.permissions.role.edit', $role->id) }}" class="btn btn-primary">Edit</a>
+                            <td class="d-flex justify-content-center">
+                                <a href="{{ route('admin.permissions.role.edit', $role->id) }}" class="btn btn-primary mx-2">Edit</a>
 
                                 <form action="" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">delet</button>
+                                    <button type="submit" class="btn btn-danger">delete</button>
                                 </form>
                             </td>
                         </tr>

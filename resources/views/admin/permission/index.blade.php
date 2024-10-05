@@ -31,15 +31,15 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $permission->name }}</td>
-                                <td>
+                                <td class="d-flex justify-content-center">
                                     <a href="{{ route('admin.permission.edit', $permission->id) }}"
-                                        class="btn btn-primary">edit</a>
+                                        class="btn btn-primary mx-2">edit</a>
 
                                     <form action="{{ route('admin.permission.destroy', $permission->id) }}"
-                                        method="post">
+                                        method="post" onsubmit="return confirm('Are you sure you want to delete this permission?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">delet</button>
+                                        <button type="submit" class="btn btn-danger">delete</button>
                                     </form>
                                 </td>
                             </tr>

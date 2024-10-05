@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1728091720802,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1728092315156,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,19 +20,19 @@\n     return redirect('/log-viewer');\n })->name('log-viewer');\n \n // Route untuk dashboard tergantung role\n-// Route::get('/', function () {\n-//     $user = Auth::user();\n+Route::get('/', function () {\n+    $user = Auth::user();\n \n-//     if ($user->hasRole('super-admin') || $user->hasRole('admin')) {\n-//         return redirect()->route('admin.dashboard');\n-//     } elseif ($user->hasRole('user')) {\n-//         return redirect()->route('user.dashboard');\n-//     }\n+    if ($user->hasRole('super-admin') || $user->hasRole('admin')) {\n+        return redirect()->route('admin.dashboard');\n+    } elseif ($user->hasRole('user')) {\n+        return redirect()->route('user.dashboard');\n+    }\n \n-//     return redirect('/login');  // Jika tidak ada role yang sesuai, arahkan ke login\n-// })->middleware('auth')->name('home');\n+    return redirect('/login');  // Jika tidak ada role yang sesuai, arahkan ke login\n+})->middleware('auth')->name('home');\n \n // Route untuk user dashboard\n Route::middleware(['auth', 'role:user'])->group(function () {\n     Route::get('/user-dashboard', [HomeController::class, 'userDashboard'])->name('user.dashboard');\n"
+                },
+                {
+                    "date": 1728092382004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,22 +6,18 @@\n use Illuminate\\Support\\Facades\\Route;\n use Illuminate\\Support\\Facades\\Auth;\n use Spatie\\Permission\\PermissionRegistrar;\n \n-// Handling untuk jika route tidak ditemukan\n Route::fallback(function () {\n     return view('errors.404');\n });\n \n-// Routes untuk otentikasi\n Auth::routes();\n \n-// Route untuk log viewer (misal admin log viewer)\n Route::get('/log-viewer', function () {\n     return redirect('/log-viewer');\n })->name('log-viewer');\n \n-// Route untuk dashboard tergantung role\n Route::get('/', function () {\n     $user = Auth::user();\n \n     if ($user->hasRole('super-admin') || $user->hasRole('admin')) {\n@@ -29,21 +25,18 @@\n     } elseif ($user->hasRole('user')) {\n         return redirect()->route('user.dashboard');\n     }\n \n-    return redirect('/login');  // Jika tidak ada role yang sesuai, arahkan ke login\n+    return redirect('/login'); =\n })->middleware('auth')->name('home');\n \n-// Route untuk user dashboard\n Route::middleware(['auth', 'role:user'])->group(function () {\n     Route::get('/user-dashboard', [HomeController::class, 'userDashboard'])->name('user.dashboard');\n });\n \n-// Grouping untuk route admin dan super-admin dengan prefix /admin\n Route::middleware(['auth', 'role:admin|super-admin'])->prefix('admin')->group(function () {\n     Route::get('/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');\n \n-    // Route dengan prefix /admin untuk products, orders, dan users\n     Route::get('/products', function () {\n         return view('admin.product');\n     })->name('admin.product')->middleware('can:show-product');\n \n@@ -55,9 +48,8 @@\n         return view('admin.user');\n     })->name('admin.users')->middleware('can:show-user');\n });\n \n-// Route khusus super-admin dengan prefix /admin\n Route::middleware(['auth', 'role:super-admin'])->prefix('admin')->group(function () {\n     // Route::get('/admin-accounts', [SuperAdminController::class, 'index'])\n     // ->name('admin.accounts');\n     // // ->middleware('can:show-admin-account');\n"
                 }
             ],
             "date": 1728091720802,

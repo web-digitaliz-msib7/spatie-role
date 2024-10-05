@@ -17,7 +17,11 @@
         </div>
         <div class="table-responsive pt-10">
             <div class="pb-5">
-                <a href="{{ route('admin.accounts.create') }}" class="btn btn-primary"> Create akun</a>
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
+                    Create
+                </button>
+                <x-alert.error-validation />
             </div>
             <table class="table text-nowrap mb-0">
                 <thead class="table-light">
@@ -43,13 +47,15 @@
                                 @endforeach
                             </td>
                             <td class="d-flex justify-content-center">
-                                <a href="{{ route('admin.accounts.edit', $user->id) }}" class="btn btn-primary mx-2">Edit</a>
-                            
-                                <form action="{{ route('admin.accounts.destroy', $user->id) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                <button type="button" class="btn btn-primary mx-2"
+                                    data-url="{{ route('admin.accounts.edit', $user->id) }}" data-title="Edit Account"
+                                    data-bs-toggle="modal" data-bs-target=".edit-modal">
+                                    Edit
+                                </button>
+
+                                <a href="{{ route('admin.accounts.destroy', $user->id) }}" class="btn btn-danger"
+                                    data-sweetalert-delete data-title="Delete!"
+                                    data-text="Are you sure you want to delete {{ $user->name }}?">Hapus</a>
                             </td>
                         </tr>
                     @endforeach
@@ -58,4 +64,17 @@
             </table>
         </div>
     </div>
+
+
+    <x-modal.modal>
+        <x-form.form action="{{ route('admin.accounts.store') }}">
+
+            @include('admin.account._form')
+            <div class="d-grid">
+                <x-button.btn>Create Admin</x-button.btn>
+            </div>
+        </x-form.form>
+    </x-modal.modal>
+
+    <x-modal.show class="edit-modal" />
 </x-app-layout>

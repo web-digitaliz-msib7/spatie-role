@@ -1,9 +1,11 @@
-<div class="mb-3">
-    <label for="name" class="form-label">Permission Name</label>
-    <input type="text" class="form-control" name="name" value="{{old('name', @$id->name)}}">
-    @error('name')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-</div>
+<x-form.input id="name" label="User Name" name="name" placeholder="User Name"  />
+
+<!-- Email Input -->
+<x-form.input id="email" label="Email" name="email" type="email" placeholder="Email address here" />
+
+<!-- Password Input -->
+<x-form.input id="password" label="Password" name="password" type="password" placeholder="**************" />
+
+<!-- Confirm Password Input -->
+<x-form.input id="password-confirm" label="Confirm Password" name="password_confirmation" type="password"
+    placeholder="**************" />

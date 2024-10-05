@@ -14,10 +14,14 @@
 
                 </div>
             </div>
-            <div class="table-responsive pt-5">
+            <div class="table-responsive pt-10">
                 <div class="pb-5">
-                    <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary">Create</a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
+                        Create
+                    </button>
+                    {{-- <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary">Create</a> --}}
                 </div>
+                <x-alert.error-validation />
                 <table class="table text-nowrap mb-0">
                     <thead class="table-light">
                         <tr>
@@ -32,15 +36,17 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $permission->name }}</td>
                                 <td class="d-flex justify-content-center">
-                                    <a href="{{ route('admin.permission.edit', $permission->id) }}"
-                                        class="btn btn-primary mx-2">edit</a>
+                                    <button type="button" class="btn btn-primary mx-2"
+                                        data-url="{{ route('admin.permission.edit', $permission->id) }}"
+                                        data-title="Edit Permission" data-bs-toggle="modal"
+                                        data-bs-target=".edit-modal">
+                                        Edit
+                                    </button>
 
-                                    <form action="{{ route('admin.permission.destroy', $permission->id) }}"
-                                        method="post" onsubmit="return confirm('Are you sure you want to delete this permission?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">delete</button>
-                                    </form>
+                                    <a href="{{ route('admin.permission.destroy', $permission->id) }}"
+                                        class="btn btn-sm btn-danger" data-sweetalert-delete
+                                        data-title="Delete!"
+                                        data-text="Are you sure you want to delete {{ $permission->name }}?">Hapus</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -49,4 +55,17 @@
             </div>
         </div>
     </div>
+
+    <x-modal.modal>
+        <x-form.form action="{{ route('admin.permission.store') }}">
+            @include('admin.permission._form')
+            <div class="modal-footer">
+                <x-button.btn class="btn btn-secondary" data-bs-dismiss="modal">Close</x-button.btn>
+                <x-button.btn class="btn btn-primary">Save changes</x-button.btn>
+            </div>
+        </x-form.form>
+    </x-modal.modal>
+
+    <x-modal.show class="edit-modal" />
+
 </x-app-layout>

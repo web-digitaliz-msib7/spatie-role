@@ -26,7 +26,7 @@ Route::get('/', function () {
         return redirect()->route('user.dashboard');
     }
 
-    return redirect('/login'); =
+    return redirect('/login');
 })->middleware('auth')->name('home');
 
 Route::middleware(['auth', 'role:user'])->group(function () {
@@ -61,6 +61,9 @@ Route::middleware(['auth', 'role:super-admin'])->prefix('admin')->group(function
 
     Route::post('/admin-accounts/store', [SuperAdminController::class, 'store'])
     ->name('admin.accounts.store');
+
+    Route::put('/admin-accounts/update/{id}', [SuperAdminController::class, 'update'])
+    ->name('admin.accounts.update');
 
     // edit akun
     Route::get('/admin-accounts/edit/{id}', [SuperAdminController::class, 'edit'])->name('admin.accounts.edit');

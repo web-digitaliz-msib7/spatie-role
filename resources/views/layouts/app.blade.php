@@ -10,6 +10,7 @@
 <body>
     <div id="db-wrapper">
         <!-- navbar vertical -->
+    @include('includes.actions.sweetalert-delete')
         @auth
             @include('includes.navbar-vertical')
 

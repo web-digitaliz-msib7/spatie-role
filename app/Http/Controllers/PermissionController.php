@@ -50,7 +50,7 @@ class PermissionController extends Controller
     public function edit(Permission $id)
     {
         return view('admin.permission.edit', compact('id'));
-        
+
     }
 
     /**
@@ -84,8 +84,21 @@ class PermissionController extends Controller
         return view('admin.role-permission.role-permission-edit', compact('id', 'permissions'));
     }
 
-    public function rolePermissionUpdate()
+    public function rolePermissionUpdate(Request $request, Role $id)
     {
-        
+        // Validate the incoming request
+        $validatedData = $request->validate([
+            'name' => 'array',
+            'name.*' => 'integer|exists:permissions,id',
+        ]);
+
+        // Retrieve permission names based on the IDs
+        $permissions = Permission::whereIn('id', $validatedData['name'] ?? [])->pluck('name');
+
+        $id->syncPermissions($permissions);
+
+        return redirect()->back()->with('success', 'Permissions updated successfully.');
     }
+
+
 }

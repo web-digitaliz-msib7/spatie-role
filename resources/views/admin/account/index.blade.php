@@ -55,7 +55,7 @@
 
                                 <a href="{{ route('admin.accounts.destroy', $user->id) }}" class="btn btn-danger"
                                     data-sweetalert-delete data-title="Delete!"
-                                    data-text="Are you sure you want to delete {{ $user->name }}?">Hapus</a>
+                                    data-text="Are you sure you want to delete {{ $user->name }}?">Delete</a>
                             </td>
                         </tr>
                     @endforeach
@@ -66,7 +66,7 @@
     </div>
 
 
-    <x-modal.modal>
+    <x-modal.modal title="Create Admin">
         <x-form.form action="{{ route('admin.accounts.store') }}">
 
             @include('admin.account._form')

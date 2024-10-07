@@ -1,0 +1,30 @@
+{
+    "sourceFile": "resources/views/components/modal/modal.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1728264368646,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1728264390116,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+<div class=\"modal fade\" id=\"create\" tabindex=\"-1\" aria-labelledby=\"create\" aria-hidden=\"true\">\n+    <div class=\"modal-dialog\">\n+        <div class=\"modal-content\">\n+            <div class=\"modal-header\">\n+                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Create Account</h5>\n+                <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n+            </div>\n+            <div class=\"modal-body\">\n+                {{ $slot }}\n+            </div>\n+        </div>\n+    </div>\n+</div>\n"
+                },
+                {
+                    "date": 1728264920211,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+@props(['title'])\n+<div class=\"modal fade\" id=\"create\" tabindex=\"-1\" aria-labelledby=\"create\" aria-hidden=\"true\">\n+    <div class=\"modal-dialog\">\n+        <div class=\"modal-content\">\n+            <div class=\"modal-header\">\n+                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Create Account</h5>\n+                <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n+            </div>\n+            <div class=\"modal-body\">\n+                {{ $slot }}\n+            </div>\n+        </div>\n+    </div>\n+</div>\n"
+                },
+                {
+                    "date": 1728264941199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n <div class=\"modal fade\" id=\"create\" tabindex=\"-1\" aria-labelledby=\"create\" aria-hidden=\"true\">\n     <div class=\"modal-dialog\">\n         <div class=\"modal-content\">\n             <div class=\"modal-header\">\n-                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Create Account</h5>\n+                <h5 class=\"modal-title\" id=\"exampleModalLabel\">{{ $title }}</h5>\n                 <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n             </div>\n             <div class=\"modal-body\">\n                 {{ $slot }}\n"
+                }
+            ],
+            "date": 1728264368646,
+            "name": "Commit-0",
+            "content": "<div class=\"modal fade\" id=\"create\" tabindex=\"-1\" aria-labelledby=\"create\" aria-hidden=\"true\">\n    <div class=\"modal-dialog\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Create Modal</h5>\n                <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n            </div>\n            <div class=\"modal-body\">\n                {{ $slot }}\n            </div>\n        </div>\n    </div>\n</div>\n"
+        }
+    ]
+}

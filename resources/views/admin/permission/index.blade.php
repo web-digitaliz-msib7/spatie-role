@@ -44,9 +44,9 @@
                                     </button>
 
                                     <a href="{{ route('admin.permission.destroy', $permission->id) }}"
-                                        class="btn btn-sm btn-danger" data-sweetalert-delete
+                                        class="btn btn-danger" data-sweetalert-delete
                                         data-title="Delete!"
-                                        data-text="Are you sure you want to delete {{ $permission->name }}?">Hapus</a>
+                                        data-text="Are you sure you want to delete {{ $permission->name }}?">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <x-modal.modal>
+    <x-modal.modal title="Create Permission">
         <x-form.form action="{{ route('admin.permission.store') }}">
             @include('admin.permission._form')
             <div class="modal-footer">

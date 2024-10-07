@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/admin/account/edit.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1728183411861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1728183411861,
+            "name": "Commit-0",
+            "content": "<x-form.form action=\"{{ route('admin.accounts.update', $id->id) }}\">\n    <x-form.input id=\"name\" label=\"User Name\" name=\"name\" placeholder=\"User Name\" value=\"{{ $id->name }}\" />\n\n    <x-form.input id=\"email\" label=\"Email\" name=\"email\" placeholder=\"Email Adress here\"\n        value=\"{{ $id->email }}\" />\n\n    <x-form.input id=\"password\" label=\"Old Password\" name=\"password\" placeholder=\"**************\" />\n\n    <x-form.input id=\"password\" label=\"New Password\" name=\"password\" placeholder=\"**************\" />\n\n    <x-form.input id=\"confirm-password\" label=\"Old Password\" name=\"password\" placeholder=\"**************\" />\n\n    <div class=\"d-grid\">\n        <x-button.btn>Update Admin</x-button.btn>\n    </div>\n</x-form.form>\n"
+        }
+    ]
+}

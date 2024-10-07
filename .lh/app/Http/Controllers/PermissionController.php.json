@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1728091832200,
@@ -12,6 +12,10 @@
                 {
                     "date": 1728091841230,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,9 +74,9 @@\n \n     public function role()\n     {\n         $roles = Role::all();\n-        return view('admin.permission.roles-permission', compact('roles'));\n+        return view('admin.role-permission.roles-permission', compact('roles'));\n     }\n \n     public function rolePermissionEdit(Role $id)\n     {\n"
+                },
+                {
+                    "date": 1728264609368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n         $permissions = Permission::whereIn('id', $validatedData['name'] ?? [])->pluck('name');\n \n         $id->syncPermissions($permissions);\n \n-        return redirect()->back()->with('success', 'Permissions updated successfully.');\n+        return redirect()->route('admin.permissions.role')->with('success', 'Permissions updated successfully.');\n     }\n \n \n-}\n+}\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1728091832200,

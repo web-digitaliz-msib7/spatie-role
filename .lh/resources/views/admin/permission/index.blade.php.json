@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1728091103920,
@@ -36,6 +36,14 @@
                 {
                     "date": 1728091459680,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n                                     <a href=\"{{ route('admin.permission.edit', $permission->id) }}\"\n                                         class=\"btn btn-primary mx-2\">edit</a>\n \n                                     <form action=\"{{ route('admin.permission.destroy', $permission->id) }}\"\n-                                        method=\"post\" onsubmit=\"return confirm('Are you sure you want to delete this account?');\">\n+                                        method=\"post\" onsubmit=\"return confirm('Are you sure you want to delete this permission?');\">\n                                         @csrf\n                                         @method('DELETE')\n                                         <button type=\"submit\" class=\"btn btn-danger\">delete</button>\n                                     </form>\n"
+                },
+                {
+                    "date": 1728265026224,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n             </div>\n         </div>\n     </div>\n \n-    <x-modal.modal>\n+    <x-modal.modal title=\"Create Permission\">\n         <x-form.form action=\"{{ route('admin.permission.store') }}\">\n             @include('admin.permission._form')\n             <div class=\"modal-footer\">\n                 <x-button.btn class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</x-button.btn>\n"
+                },
+                {
+                    "date": 1728265103066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n                                         Edit\n                                     </button>\n \n                                     <a href=\"{{ route('admin.permission.destroy', $permission->id) }}\"\n-                                        class=\"btn btn-sm btn-danger\" data-sweetalert-delete\n+                                        class=\"btn btn-danger\" data-sweetalert-delete\n                                         data-title=\"Delete!\"\n                                         data-text=\"Are you sure you want to delete {{ $permission->name }}?\">Hapus</a>\n                                 </td>\n                             </tr>\n"
                 }
             ],
             "date": 1728091103920,

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1728091878842,
@@ -16,6 +16,10 @@
                 {
                     "date": 1728091949829,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \n                                 <form action=\"\" method=\"post\">\n                                     @csrf\n                                     @method('DELETE')\n-                                    <button type=\"submit\" class=\"btn btn-danger\">delet</button>\n+                                    <button type=\"submit\" class=\"btn btn-danger\">delete</button>\n                                 </form>\n                             </td>\n                         </tr>\n                     @endforeach\n"
+                },
+                {
+                    "date": 1728265138258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \n                                 <form action=\"\" method=\"post\">\n                                     @csrf\n                                     @method('DELETE')\n-                                    <button type=\"submit\" class=\"btn btn-danger\">delete</button>\n+                                    <button type=\"submit\" class=\"btn btn-danger\">Delete</button>\n                                 </form>\n                             </td>\n                         </tr>\n                     @endforeach\n"
                 }
             ],
             "date": 1728091878842,

@@ -97,7 +97,7 @@ class PermissionController extends Controller
 
         $id->syncPermissions($permissions);
 
-        return redirect()->back()->with('success', 'Permissions updated successfully.');
+        return redirect()->route('admin.permissions.role')->with('success', 'Permissions updated successfully.');
     }
 
 

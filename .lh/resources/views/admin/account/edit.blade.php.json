@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1728183411861,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1728268596887,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,17 @@\n-<x-form.form action=\"{{ route('admin.accounts.update', $id->id) }}\">\n-    <x-form.input id=\"name\" label=\"User Name\" name=\"name\" placeholder=\"User Name\" value=\"{{ $id->name }}\" />\n+<x-form.form action=\"{{ route('admin.accounts.update', $id->id) }}\" method=\"POST\">\n+    @csrf\n+    @method('PUT') <!-- Menambahkan metode PUT untuk update -->\n+    \n+    <x-form.input id=\"name\" label=\"User Name\" name=\"name\" placeholder=\"User Name\" value=\"{{ old('name', $id->name) }}\" />\n \n-    <x-form.input id=\"email\" label=\"Email\" name=\"email\" placeholder=\"Email Adress here\"\n-        value=\"{{ $id->email }}\" />\n+    <x-form.input id=\"email\" label=\"Email\" name=\"email\" placeholder=\"Email Address here\" type=\"email\" value=\"{{ old('email', $id->email) }}\" />\n \n-    <x-form.input id=\"password\" label=\"Old Password\" name=\"password\" placeholder=\"**************\" />\n+    <x-form.input id=\"old-password\" label=\"Old Password\" name=\"old_password\" type=\"password\" placeholder=\"Old Password (if changing)\" />\n \n-    <x-form.input id=\"password\" label=\"New Password\" name=\"password\" placeholder=\"**************\" />\n+    <x-form.input id=\"password\" label=\"New Password\" name=\"password\" type=\"password\" placeholder=\"Leave blank if not changing\" />\n \n-    <x-form.input id=\"confirm-password\" label=\"Old Password\" name=\"password\" placeholder=\"**************\" />\n+    <x-form.input id=\"password-confirm\" label=\"Confirm Password\" name=\"password_confirmation\" type=\"password\" placeholder=\"Confirm New Password\" />\n \n     <div class=\"d-grid\">\n         <x-button.btn>Update Admin</x-button.btn>\n     </div>\n"
+                },
+                {
+                    "date": 1728268663894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,4 +15,13 @@\n     <div class=\"d-grid\">\n         <x-button.btn>Update Admin</x-button.btn>\n     </div>\n </x-form.form>\n+@if ($errors->any())\n+    <div class=\"alert alert-danger\">\n+        <ul>\n+            @foreach ($errors->all() as $error)\n+                <li>{{ $error }}</li>\n+            @endforeach\n+        </ul>\n+    </div>\n+@endif\n"
                 }
             ],
             "date": 1728183411861,

@@ -46,7 +46,7 @@ class SuperAdminController extends Controller
         ]);
         $user->assignRole('admin');
 
-        return to_route('admin.accounts');
+        return to_route('admin.accounts')->with('success', 'Account Created Successfully');
     }
 
     /**
@@ -70,8 +70,32 @@ class SuperAdminController extends Controller
      */
     public function update(Request $request, User $id)
     {
-        
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id->id,
+            'old_password' => 'nullable|string|min:8',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        // Pastikan pengguna memasukkan old_password jika mengubah password
+        if ($request->old_password && !Hash::check($request->old_password, $id->password)) {
+            return back()->withErrors(['old_password' => 'Old password is incorrect.']);
+        }
+
+        // Update user data
+        $id->name = $request->name;
+        $id->email = $request->email;
+
+        // Update password hanya jika diisi
+        if ($request->filled('password')) {
+            $id->password = Hash::make($request->password);
     }
+
+        $id->save();
+
+        return redirect()->route('admin.accounts')->with('success', 'Account updated successfully.');
+    }
+
 
     /**
      * Remove the specified resource from storage.

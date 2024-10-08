@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1728353676647,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1728356013635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,7 +27,7 @@\n         // Memberikan izin ke peran\n         $roleSuperAdmin->givePermissionTo(Permission::all());\n         // $roleAdmin->givePermissionTo(['show-product', 'show-order', 'show-user']);\n \n-        $roleUser->givePermissionTo('show-product');\n+        // $roleUser->givePermissionTo('show-product');\n     }\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1728353676647,

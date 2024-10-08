@@ -10,7 +10,7 @@
                     <i data-feather="home" class="nav-icon icon-xs me-2"></i> Dashboard
                 </a>
             </li>
-            @if(Auth::check())
+            {{-- @if(Auth::check()) --}}
             @can('show-product')
             <li class="nav-item">
                 <a class="nav-link has-arrow" href="{{ route('admin.product') }}">
@@ -18,7 +18,7 @@
                 </a>
             </li>
             @endcan
-            @endif
+            {{-- @endif --}}
             @can('show-order')
             <li class="nav-item">
                 <a class="nav-link has-arrow" href="{{ route('admin.orders') }}">

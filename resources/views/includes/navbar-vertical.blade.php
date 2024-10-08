@@ -1,20 +1,16 @@
 <!-- Sidebar -->
 <nav class="navbar-vertical navbar">
     <div class="nav-scroller">
-        <!-- Brand logo -->
         <a class="navbar-brand" href="/">
             <img src="{{ asset('assets') }}/images/brand/logo/logo.svg" alt="" />
         </a>
-        <!-- Navbar nav -->
         <ul class="navbar-nav flex-column" id="sideNavbar">
-            <!-- Menu untuk semua peran -->
             <li class="nav-item">
                 <a class="nav-link has-arrow" href="/">
                     <i data-feather="home" class="nav-icon icon-xs me-2"></i> Dashboard
                 </a>
             </li>
-
-            <!-- Menu untuk Admin dan Super-admin -->
+            @if(Auth::check())
             @can('show-product')
             <li class="nav-item">
                 <a class="nav-link has-arrow" href="{{ route('admin.product') }}">
@@ -22,7 +18,7 @@
                 </a>
             </li>
             @endcan
-
+            @endif
             @can('show-order')
             <li class="nav-item">
                 <a class="nav-link has-arrow" href="{{ route('admin.orders') }}">
@@ -39,7 +35,6 @@
             </li>
             @endcan
 
-            <!-- Menu khusus untuk Super-admin -->
             @role('super-admin')
             <li class="nav-item">
                 <a class="nav-link has-arrow" href="{{ route('admin.accounts') }}">
@@ -50,12 +45,6 @@
             <li class="nav-item">
                 <a class="nav-link has-arrow" href="{{ route('admin.permissions') }}">
                     <i data-feather="lock" class="nav-icon icon-xs me-2"></i> Permission
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link has-arrow" href="{{ route('admin.permissions.role') }}">
-                    <i data-feather="lock" class="nav-icon icon-xs me-2"></i> Role Permission
                 </a>
             </li>
             @endrole

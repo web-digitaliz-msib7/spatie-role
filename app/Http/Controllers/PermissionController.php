@@ -72,33 +72,33 @@ class PermissionController extends Controller
         return redirect()->route('admin.permissions')->with('success', 'Permission deleted successfully');
     }
 
-    public function role()
-    {
-        $roles = Role::all();
-        return view('admin.role-permission.roles-permission', compact('roles'));
-    }
+    // public function role()
+    // {
+    //     $roles = Role::all();
+    //     return view('admin.role-permission.roles-permission', compact('roles'));
+    // }
 
-    public function rolePermissionEdit(Role $id)
-    {
-        $permissions = Permission::all();
-        return view('admin.role-permission.role-permission-edit', compact('id', 'permissions'));
-    }
+    // public function rolePermissionEdit(Role $id)
+    // {
+    //     $permissions = Permission::all();
+    //     return view('admin.role-permission.role-permission-edit', compact('id', 'permissions'));
+    // }
 
-    public function rolePermissionUpdate(Request $request, Role $id)
-    {
-        // Validate the incoming request
-        $validatedData = $request->validate([
-            'name' => 'array',
-            'name.*' => 'integer|exists:permissions,id',
-        ]);
+    // public function rolePermissionUpdate(Request $request, Role $id)
+    // {
+    //     // Validate the incoming request
+    //     $validatedData = $request->validate([
+    //         'name' => 'array',
+    //         'name.*' => 'integer|exists:permissions,id',
+    //     ]);
 
-        // Retrieve permission names based on the IDs
-        $permissions = Permission::whereIn('id', $validatedData['name'] ?? [])->pluck('name');
+    //     // Retrieve permission names based on the IDs
+    //     $permissions = Permission::whereIn('id', $validatedData['name'] ?? [])->pluck('name');
 
-        $id->syncPermissions($permissions);
+    //     $id->syncPermissions($permissions);
 
-        return redirect()->route('admin.permissions.role')->with('success', 'Permissions updated successfully.');
-    }
+    //     return redirect()->route('admin.permissions.role')->with('success', 'Permissions updated successfully.');
+    // }
 
 
 }

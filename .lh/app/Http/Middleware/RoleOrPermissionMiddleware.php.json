@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Http/Middleware/RoleOrPermissionMiddleware.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1728350681456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1728350695070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n \n use Closure;\n use Illuminate\\Http\\Request;\n use Symfony\\Component\\HttpFoundation\\Response;\n+use Illuminate\\Support\\Facades\\Auth;\n \n class RoleOrPermissionMiddleware\n {\n     /**\n"
+                }
+            ],
+            "date": 1728350681456,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Middleware;\n\nuse Closure;\nuse Illuminate\\Http\\Request;\nuse Symfony\\Component\\HttpFoundation\\Response;\n\nclass RoleOrPermissionMiddleware\n{\n    /**\n     * Handle an incoming request.\n     *\n     * @param  \\Closure(\\Illuminate\\Http\\Request): (\\Symfony\\Component\\HttpFoundation\\Response)  $next\n     */\n    public function handle(Request $request, Closure $next, $rolesOrPermissions)\n    {\n        $rolesOrPermissions = explode('|', $rolesOrPermissions);\n\n        foreach ($rolesOrPermissions as $roleOrPermission) {\n            if (Auth::check() && (Auth::user()->hasRole($roleOrPermission) || Auth::user()->can($roleOrPermission))) {\n                return $next($request);\n            }\n        }\n\n        return redirect('/')->with('error', 'Unauthorized');\n    }\n}"
+        }
+    ]
+}

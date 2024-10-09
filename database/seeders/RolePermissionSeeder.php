@@ -11,10 +11,10 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         // Membuat izin
-        Permission::create(['name' => 'show-product']);
-        Permission::create(['name' => 'show-order']);
-        Permission::create(['name' => 'show-user']);
-        Permission::create(['name' => 'show-admin-account']);
+        Permission::create(['name' => 'view-product']);
+        Permission::create(['name' => 'view-order']);
+        Permission::create(['name' => 'view-user']);
+        Permission::create(['name' => 'view-admin-account']);
         Permission::create(['name' => 'create-admin-account']);
         Permission::create(['name' => 'update-admin-account']);
         Permission::create(['name' => 'delete-admin-account']);
@@ -26,8 +26,8 @@ class RolePermissionSeeder extends Seeder
 
         // Memberikan izin ke peran
         $roleSuperAdmin->givePermissionTo(Permission::all());
-        // $roleAdmin->givePermissionTo(['show-product', 'show-order', 'show-user']);
+        // $roleAdmin->givePermissionTo(['view-product', 'view-order', 'view-user']);
 
-        // $roleUser->givePermissionTo('show-product');
+        // $roleUser->givePermissionTo('view-product');
     }
 }

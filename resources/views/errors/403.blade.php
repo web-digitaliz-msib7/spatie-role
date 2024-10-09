@@ -9,7 +9,7 @@
             <div class="text-center">
                 <div class="mb-3">
                     <!-- img -->
-                    <img src="../assets/images/error/403-error-img.png" alt="403 Forbidden" class="img-fluid">
+                    <img src="{{ asset('assets/images/error/403-error-img.png') }}" alt="403 Forbidden" class="img-fluid">
                 </div>
                 <!-- text -->
                 <h1 class="display-4 fw-bold">Oops! Access Denied.</h1>

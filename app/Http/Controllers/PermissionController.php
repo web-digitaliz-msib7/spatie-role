@@ -34,42 +34,42 @@ class PermissionController extends Controller
     {
         $request->validated();
         Permission::create($request->all());
-        return redirect()->route('admin.permissions')->with('success', 'Permission created successfully');
+        return redirect()->route('permissions.index')->with('success', 'Permission created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $permission)
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Permission $id)
+    public function edit(Permission $permission)
     {
-        return view('admin.permission.edit', compact('id'));
+        return view('admin.permission.edit', compact('permission'));
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(PermissonRequest $request, Permission $id)
+    public function update(PermissonRequest $request, Permission $permission)
     {
         $request->validated();
-        $id->update($request->all());
-        return redirect()->route('admin.permissions')->with('success', 'Permission updated successfully');
+        $permission->update($request->all());
+        return redirect()->route('permissions.index')->with('success', 'Permission updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Permission $id)
+    public function destroy(Permission $permission)
     {
-        $id->delete();
-        return redirect()->route('admin.permissions')->with('success', 'Permission deleted successfully');
+        $permission->delete();
+        return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully');
     }
 
     // public function role()
@@ -78,13 +78,13 @@ class PermissionController extends Controller
     //     return view('admin.role-permission.roles-permission', compact('roles'));
     // }
 
-    // public function rolePermissionEdit(Role $id)
+    // public function rolePermissionEdit(Role $permission)
     // {
     //     $permissions = Permission::all();
     //     return view('admin.role-permission.role-permission-edit', compact('id', 'permissions'));
     // }
 
-    // public function rolePermissionUpdate(Request $request, Role $id)
+    // public function rolePermissionUpdate(Request $request, Role $permission)
     // {
     //     // Validate the incoming request
     //     $validatedData = $request->validate([
@@ -95,7 +95,7 @@ class PermissionController extends Controller
     //     // Retrieve permission names based on the IDs
     //     $permissions = Permission::whereIn('id', $validatedData['name'] ?? [])->pluck('name');
 
-    //     $id->syncPermissions($permissions);
+    //     $permission->syncPermissions($permissions);
 
     //     return redirect()->route('admin.permissions.role')->with('success', 'Permissions updated successfully.');
     // }

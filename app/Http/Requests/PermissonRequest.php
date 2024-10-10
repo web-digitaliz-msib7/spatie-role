@@ -22,7 +22,7 @@ class PermissonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:permissions',
+            'name' => 'required|string|max:255',
         ];
     }
 }

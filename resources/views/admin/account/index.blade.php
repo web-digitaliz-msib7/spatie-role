@@ -14,9 +14,7 @@
         </div>
         <div class="table-responsive pt-10">
             <div class="pb-5">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
-                    Create
-                </button>
+                <a href="{{ route('admin-accounts.create') }}" class="btn btn-primary">Create</a>
                 <x-alert.error-validation />
             </div>
             <table class="table text-nowrap mb-0">
@@ -26,7 +24,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Permissions</th> <!-- Tambahkan kolom untuk permissions -->
+                        <th>Permissions</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -46,13 +44,11 @@
                                     <span class="badge bg-info">{{ $permission->name }}</span>
                                 @endforeach
                             </td>
-                            <td class="d-flex justify-content-center">
-                                <button type="button" class="btn btn-primary mx-2"
-                                    data-url="{{ route('admin.accounts.edit', $user->id) }}" data-title="Edit Account"
-                                    data-bs-toggle="modal" data-bs-target=".edit-modal">
+                            <td class="d-flex justify-content-center" >
+                                <a href="{{ route('admin-accounts.edit', $user->id) }}" class="btn btn-primary mx-2">
                                     Edit
-                                </button>
-                                <a href="{{ route('admin.accounts.destroy', $user->id) }}" class="btn btn-danger"
+                                </a>
+                                <a href="{{ route('admin-accounts.destroy', $user->id) }}" class="btn btn-danger"
                                     data-sweetalert-delete data-title="Delete!"
                                     data-text="Are you sure you want to delete {{ $user->name }}?">Delete</a>
                             </td>
@@ -62,27 +58,4 @@
             </table>
         </div>
     </div>
-
-    <!-- Modal Create Admin -->
-    <x-modal.modal title="Create Admin">
-        <x-form.form action="{{ route('admin.accounts.store') }}">
-            @include('admin.account._form')
-            
-            <h5 class="mt-3">Assign Permissions</h5>
-            <div>
-                @foreach ($permissions as $permission)
-                    <div>
-                        <input type="checkbox" name="permissions[]" value="{{ $permission->id }}">
-                        <label>{{ $permission->name }}</label>
-                    </div>
-                @endforeach
-            </div>
-            
-            <div class="d-grid">
-                <x-button.btn>Create Admin</x-button.btn>
-            </div>
-        </x-form.form>
-    </x-modal.modal>
-    
-    <x-modal.show class="edit-modal" />
 </x-app-layout>

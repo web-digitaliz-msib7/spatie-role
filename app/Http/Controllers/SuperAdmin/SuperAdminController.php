@@ -25,8 +25,9 @@ class SuperAdminController extends Controller
      */
     public function create()
     {
+        $users = User::role('admin')->with('permissions')->get();
         $permissions = Permission::all();
-        return view('admin.account.index', compact('permissions'));
+        return view('admin.account.create', compact('permissions', 'users'));
     }
 
     /**
@@ -55,14 +56,14 @@ class SuperAdminController extends Controller
             $user->permissions()->sync($request->permissions);
         }
 
-        return to_route('admin.accounts')->with('success', 'Account Created Successfully');
+        return to_route('admin-accounts.index')->with('success', 'Account Created Successfully');
     }
 
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $admin_account)
     {
         //
     }
@@ -70,60 +71,59 @@ class SuperAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $id)
+    public function edit(User $admin_account)
     {
         $permissions = Permission::all();
-        $userPermissions = $id->permissions->pluck('id')->toArray();
-        return view('admin.account.edit', compact('id', 'permissions', 'userPermissions'));
+        $userPermissions = $admin_account->permissions->pluck('id')->toArray();
+        return view('admin.account.edit', compact('admin_account', 'permissions', 'userPermissions'));
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $id)
+    public function update(Request $request, User $admin_account)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $admin_account->id,
             'old_password' => 'nullable|string|min:8',
             'password' => 'nullable|string|min:8|confirmed',
             'permissions' => 'array', // Validasi permissions
             'permissions.*' => 'integer|exists:permissions,id', // Validasi ID permission
         ]);
-    
+
         // Pastikan pengguna memasukkan old_password jika mengubah password
-        if ($request->old_password && !Hash::check($request->old_password, $id->password)) {
+        if ($request->old_password && !Hash::check($request->old_password, $admin_account->password)) {
             return back()->withErrors(['old_password' => 'Old password is incorrect.']);
         }
-    
+
         // Update user data
-        $id->name = $request->name;
-        $id->email = $request->email;
-    
+        $admin_account->name = $request->name;
+        $admin_account->email = $request->email;
+
         // Update password hanya jika diisi
         if ($request->filled('password')) {
-            $id->password = Hash::make($request->password);
+            $admin_account->password = Hash::make($request->password);
         }
 
-        $id->save();
+        $admin_account->save();
 
         // Sinkronisasi permissions
         $permissions = Permission::whereIn('id', $request->permissions ?? [])->pluck('name');
-        $id->syncPermissions($permissions);
+        $admin_account->syncPermissions($permissions);
 
-        return redirect()->route('admin.accounts')->with('success', 'Account updated successfully.');
+        return redirect()->route('admin-accounts.index')->with('success', 'Account updated successfully.');
     }
-    
+
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $id)
+    public function destroy(User $admin_account)
     {
-        $id->delete();
-        return redirect()->route('admin.accounts')->with('success', 'Account deleted successfully');
+        $admin_account->delete();
+        return redirect()->route('admin-accounts.index')->with('success', 'Account deleted successfully');
     }
-
 }

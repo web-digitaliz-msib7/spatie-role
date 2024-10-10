@@ -45,20 +45,17 @@ Route::middleware(['auth', 'role_or_permission:admin|super-admin'])->prefix('adm
 });
 
 Route::middleware(['auth', 'role_or_permission:super-admin'])->prefix('admin')->group(function () {
-    Route::get('admin-accounts', [SuperAdminController::class, 'index'])->name('admin.accounts');
 
-    Route::get('/admin-accounts/create', [SuperAdminController::class, 'create'])->name('admin.accounts.create');
-    Route::post('/admin-accounts/store', [SuperAdminController::class, 'store'])->name('admin.accounts.store');
-    Route::put('/admin-accounts/update/{id}', [SuperAdminController::class, 'update'])->name('admin.accounts.update');
-    Route::get('/admin-accounts/edit/{id}', [SuperAdminController::class, 'edit'])->name('admin.accounts.edit');
-    Route::delete('/admin-accounts/destroy/{id}', [SuperAdminController::class, 'destroy'])->name('admin.accounts.destroy');
+    Route::resource('admin-accounts', SuperAdminController::class);
 
-    Route::get('permissions', [PermissionController::class, 'index'])->name('admin.permissions');
-    Route::get('permissions/create', [PermissionController::class, 'create'])->name('admin.permissions.create');
-    Route::post('permissions/store', [PermissionController::class, 'store'])->name('admin.permission.store');
-    Route::get('permissions/edit/{id}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
-    Route::put('permissions/update/{id}', [PermissionController::class, 'update'])->name('admin.permission.update');
-    Route::delete('permissions/destroy/{id}', [PermissionController::class, 'destroy'])->name('admin.permission.destroy');
+    Route::resource('permissions', PermissionController::class);
+
+    // Route::get('permissions', [PermissionController::class, 'index'])->name('admin.permissions');
+    // Route::get('permissions/create', [PermissionController::class, 'create'])->name('admin.permissions.create');
+    // Route::post('permissions/store', [PermissionController::class, 'store'])->name('admin.permission.store');
+    // Route::get('permissions/edit/{id}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
+    // Route::put('permissions/update/{id}', [PermissionController::class, 'update'])->name('admin.permission.update');
+    // Route::delete('permissions/destroy/{id}', [PermissionController::class, 'destroy'])->name('admin.permission.destroy');
 
     Route::get('role-permissions', [PermissionController::class, 'role'])->name('admin.permissions.role');
     Route::get('role-permissions/edit/{id}', [PermissionController::class, 'rolePermissionEdit'])->name('admin.permissions.role.edit');

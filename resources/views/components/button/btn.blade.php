@@ -1,6 +1,6 @@
-@props(['type' => 'submit', 'class' => 'btn btn-primary'])
+@props(['class' => 'btn btn-primary'])
 
-    <button type="{{ $type }}" class="{{ $class }}">
+    <button class="{{ $class }}">
         {{ $slot }}
     </button>
 

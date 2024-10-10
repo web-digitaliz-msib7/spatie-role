@@ -37,13 +37,13 @@
 
             @role('super-admin')
             <li class="nav-item">
-                <a class="nav-link has-arrow" href="{{ route('admin.accounts') }}">
+                <a class="nav-link has-arrow" href="{{ route('admin-accounts.index') }}">
                     <i data-feather="user" class="nav-icon icon-xs me-2"></i> Admin Account
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link has-arrow" href="{{ route('admin.permissions') }}">
+                <a class="nav-link has-arrow" href="{{ route('permissions.index') }}">
                     <i data-feather="lock" class="nav-icon icon-xs me-2"></i> Permission
                 </a>
             </li>

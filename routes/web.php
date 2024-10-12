@@ -49,15 +49,4 @@ Route::middleware(['auth', 'role_or_permission:super-admin'])->prefix('admin')->
     Route::resource('admin-accounts', SuperAdminController::class);
 
     Route::resource('permissions', PermissionController::class);
-
-    // Route::get('permissions', [PermissionController::class, 'index'])->name('admin.permissions');
-    // Route::get('permissions/create', [PermissionController::class, 'create'])->name('admin.permissions.create');
-    // Route::post('permissions/store', [PermissionController::class, 'store'])->name('admin.permission.store');
-    // Route::get('permissions/edit/{id}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
-    // Route::put('permissions/update/{id}', [PermissionController::class, 'update'])->name('admin.permission.update');
-    // Route::delete('permissions/destroy/{id}', [PermissionController::class, 'destroy'])->name('admin.permission.destroy');
-
-    Route::get('role-permissions', [PermissionController::class, 'role'])->name('admin.permissions.role');
-    Route::get('role-permissions/edit/{id}', [PermissionController::class, 'rolePermissionEdit'])->name('admin.permissions.role.edit');
-    Route::put('role-permissions/update/{id}', [PermissionController::class, 'rolePermissionUpdate'])->name('admin.permissions.role.update');
 });

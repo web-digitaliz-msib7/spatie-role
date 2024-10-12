@@ -8,11 +8,19 @@
                         d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </i></a>
-     
+
 
         <!--Navbar nav -->
         <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
             <!-- List -->
+            <div class="px-4 pb-0 pt-2">
+                <div class="lh-1 text-end">
+                    <h5 class="mb-1"> {{ Auth::user()->name }}</h5>
+                    <h5 class="mb-1"> {{ Auth::user()->email }}</h5>
+                </div>
+                <div class="dropdown-divider mt-3 mb-2"></div>
+            </div>
+
             <li class="dropdown ms-2">
                 <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -22,13 +30,6 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
-                    <div class="px-4 pb-0 pt-2">
-                        <div class="lh-1 ">
-                            <h5 class="mb-1"> {{ Auth::user()->name }}</h5>
-                        </div>
-                        <div class=" dropdown-divider mt-3 mb-2"></div>
-                    </div>
-
                     <ul class="list-unstyled">
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"

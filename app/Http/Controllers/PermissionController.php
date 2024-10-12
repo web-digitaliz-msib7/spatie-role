@@ -15,7 +15,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::all();
+        $permissions = Permission::paginate(10);
         return view('admin.permission.index', compact('permissions'));
     }
 
@@ -71,34 +71,5 @@ class PermissionController extends Controller
         $permission->delete();
         return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully');
     }
-
-    // public function role()
-    // {
-    //     $roles = Role::all();
-    //     return view('admin.role-permission.roles-permission', compact('roles'));
-    // }
-
-    // public function rolePermissionEdit(Role $permission)
-    // {
-    //     $permissions = Permission::all();
-    //     return view('admin.role-permission.role-permission-edit', compact('id', 'permissions'));
-    // }
-
-    // public function rolePermissionUpdate(Request $request, Role $permission)
-    // {
-    //     // Validate the incoming request
-    //     $validatedData = $request->validate([
-    //         'name' => 'array',
-    //         'name.*' => 'integer|exists:permissions,id',
-    //     ]);
-
-    //     // Retrieve permission names based on the IDs
-    //     $permissions = Permission::whereIn('id', $validatedData['name'] ?? [])->pluck('name');
-
-    //     $permission->syncPermissions($permissions);
-
-    //     return redirect()->route('admin.permissions.role')->with('success', 'Permissions updated successfully.');
-    // }
-
 
 }

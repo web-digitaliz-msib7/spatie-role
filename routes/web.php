@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Admin\AdminAccountController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,17 +36,11 @@ Route::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('adm
     Route::resource('products', ProductController::class);
 
     Route::get('/orders', function () {
-        return view('admin.order');
+        return view('admin.order.index');
     })->name('orders')->middleware('permission:show-order');
-    // lihat data order
-    // export data
-    // halaman all order
-    // halaman order pending
-    // halaman order gagal
-    // halaman konfirmasi pembayaran
 
     Route::get('/users', function () {
-        return view('admin.user');
+        return view('admin.user.index');
     })->name('users')->middleware('permission:show-user');
 
     Route::resource('admin-accounts', AdminAccountController::class);
@@ -53,5 +48,6 @@ Route::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('adm
 
     Route::middleware(['role:super-admin'])->group(function () {
         Route::resource('permissions', PermissionController::class);
+        Route::resource('categories', CategoryController::class);
     });
 });

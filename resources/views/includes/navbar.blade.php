@@ -7,13 +7,14 @@
         <ul class="navbar-nav flex-column" id="sideNavbar">
             <li class="nav-item">
                 <a class="nav-link has-arrow" href="/">
-                    <i data-feather="home" class="nav-icon icon-xs me-2"></i> Dashboard
+                    {{-- <i class="bi bi-speedometer"></i> Home --}}
+                    <i data-feather="home" class="fa-solid fa-gauge nav-icon icon-xs me-2"></i> Dashboard
                 </a>
             </li>
             @can('view-product')
                 <li class="nav-item">
                     <a class="nav-link has-arrow" href="{{ route('admin.products.index') }}">
-                        <i data-feather="box" class="nav-icon icon-xs me-2"></i> Product
+                        <i class=" fa-solid fa-cart-shopping nav-icon icon-xs me-2"></i> Product
                     </a>
                 </li>
             @endcan
@@ -36,7 +37,7 @@
 
             @can('view-admin-account')
                 <li class="nav-item">
-                    <a class="nav-link has-arrow" href="{{ route('admin-accounts.index') }}">
+                    <a class="nav-link has-arrow" href="{{ route('admin.admin-accounts.index') }}">
                         <i data-feather="user" class="nav-icon icon-xs me-2"></i> Admin Account
                     </a>
                 </li>
@@ -44,7 +45,16 @@
 
             @role('super-admin')
                 <li class="nav-item">
-                    <a class="nav-link has-arrow" href="{{ route('permissions.index') }}">
+                    <a class="nav-link has-arrow" href="{{ route('admin.categories.index') }}">
+                        <i data-feather="user" class="nav-icon icon-xs me-2"></i> tes Kategori
+                    </a>
+                </li>
+            @endrole
+
+
+            @role('super-admin')
+                <li class="nav-item">
+                    <a class="nav-link has-arrow" href="{{ route('admin.permissions.index') }}">
                         <i data-feather="lock" class="nav-icon icon-xs me-2"></i> Permission
                     </a>
                 </li>

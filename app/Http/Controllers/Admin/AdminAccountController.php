@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -11,9 +12,6 @@ use Spatie\Permission\Models\Permission;
 
 class AdminAccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         Gate::authorize('view-admin-account');
@@ -26,13 +24,19 @@ class AdminAccountController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+
     public function create()
     {
         Gate::authorize('create-admin-account');
+        $users = User::role('admin')->with('permissions')->get();
+        // $permissions = Permission::all();
 
-        $permissions = Permission::all();
-        return view('admin.account.index', compact('permissions'));
+        $categories = category::with('permissions')->get();
+
+        return view('admin.account.create', compact('categories', 'users'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -45,8 +49,8 @@ class AdminAccountController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'permissions' => 'array', // Validasi untuk izin
-            'permissions.*' => 'integer|exists:permissions,id', // Validasi setiap izin
+            'permissions' => 'array',
+            'permissions.*' => 'integer|exists:permissions,id',
         ]);
 
         // Membuat user baru dengan password yang sudah dienkripsi
@@ -62,31 +66,17 @@ class AdminAccountController extends Controller
             $user->permissions()->sync($request->permissions);
         }
 
-        return to_route('admin.accounts')->with('success', 'Account Created Successfully');
+        return to_route('admin.admin-accounts.index')->with('success', 'Account Created Successfully');
     }
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(User $admin_account)
     {
-        //
+        Gate::authorize('update-admin-account');
+
+        $categories = Category::with('permissions')->get();
+        $userPermissions = $admin_account->permissions->pluck('id')->toArray();
+
+        return view('admin.account.edit', compact('admin_account', 'categories', 'userPermissions'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $adminAccount)
-    {
-        Gate::authorize('edit-admin-account');
-
-        $permissions = Permission::all();
-        $userPermissions = $adminAccount->permissions->pluck('id')->toArray();
-
-        return view('admin.account.edit', compact('adminAccount', 'permissions', 'userPermissions'));
-    }
-
 
     /**
      * Update the specified resource in storage.
@@ -124,7 +114,7 @@ class AdminAccountController extends Controller
         $permissions = Permission::whereIn('id', $request->permissions ?? [])->pluck('name');
         $adminAccount->syncPermissions($permissions);
 
-        return redirect()->route('admin.accounts')->with('success', 'Account updated successfully.');
+        return redirect()->route('admin.admin-accounts.index')->with('success', 'Account updated successfully.');
     }
 
     /**
@@ -135,7 +125,7 @@ class AdminAccountController extends Controller
         Gate::authorize('delete-admin-account');
 
         $adminAccount->delete();
-        return redirect()->route('admin.accounts')->with('success', 'Account deleted successfully');
+        return redirect()->route('admin.admin-accounts.index')->with('success', 'Account deleted successfully');
     }
 
     public function suspend(User $adminAccount)

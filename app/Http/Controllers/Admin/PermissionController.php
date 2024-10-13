@@ -1,20 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PermissonRequest;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        // Gate::authorize('view-permission');
         $permissions = Permission::paginate(10);
         return view('admin.permission.index', compact('permissions'));
     }
@@ -34,7 +31,7 @@ class PermissionController extends Controller
     {
         $request->validated();
         Permission::create($request->all());
-        return redirect()->route('permissions.index')->with('success', 'Permission created successfully');
+        return redirect()->route('admin.permissions.index')->with('success', 'Permission created successfully');
     }
 
     /**
@@ -60,7 +57,7 @@ class PermissionController extends Controller
     {
         $request->validated();
         $permission->update($request->all());
-        return redirect()->route('permissions.index')->with('success', 'Permission updated successfully');
+        return redirect()->route('admin.permissions.index')->with('success', 'Permission updated successfully');
     }
 
     /**
@@ -69,7 +66,6 @@ class PermissionController extends Controller
     public function destroy(Permission $permission)
     {
         $permission->delete();
-        return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully');
+        return redirect()->route('admin.permissions.index')->with('success', 'Permission deleted successfully');
     }
-
 }

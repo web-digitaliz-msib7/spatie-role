@@ -41,3 +41,39 @@
                                             value="{{ $permission->id }}" id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ {{-- <div class="mb-3">
+                                        <label for="username" class="form-label"><i
+                                                class="fa-solid fa-user me-2"></i>Form Input Akun</label>
+                                        <input type="text" class="form-control" id="username" name="username"
+                                            placeholder="Masukkan nama akun">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label"><i
+                                                class="fa-solid fa-envelope me-2"></i>Email</label>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            placeholder="Masukkan email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label"><i
+                                                class="fa-solid fa-key me-2"></i>Password</label>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="Masukkan password">
+                                    </div> --}}

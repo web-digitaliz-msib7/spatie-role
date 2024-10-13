@@ -1,4 +1,4 @@
-<x-form.input id="name" label="User Name" name="name" placeholder="User Name"  />
+<x-form.input id="name" label="User Name" class="fa-solid fa-user" name="name" placeholder="User Name"  />
 
 <!-- Email Input -->
 <x-form.input id="email" label="Email" name="email" type="email" placeholder="Email address here" />

@@ -13,7 +13,7 @@
                     </svg>
                     Refresh
                 </a>
-                <a href="{{ route('permissions.create') }}" class="btn btn-primary">
+                <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-plus-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
@@ -50,7 +50,6 @@
                             <thead class="table-secondary text-dark fw-bold">
                                 <tr>
                                     <th class="col">#</th>
-                                    <th class="col">Category</th>
                                     <th class="col">User Permission</th>
                                     <th class="col">Action</th>
                                 </tr>
@@ -60,12 +59,11 @@
                                     <tr>
                                         <th class="text-center">{{ $loop->iteration }}</th>
                                         <td>{{ $permission->name }}</td>
-                                        <td>{{ $permission->name }}</td>
                                         <td class="d-flex justify-content-center">
-                                            <a href="{{ route('permissions.edit', $permission->id) }}"
+                                            <a href="{{ route('admin.permissions.edit', $permission->id) }}"
                                                 class="btn btn-primary mx-2">Edit</a>
 
-                                            <a href="{{ route('permissions.destroy', $permission->id) }}"
+                                            <a href="{{ route('admin.permissions.destroy', $permission->id) }}"
                                                 class="btn btn-danger" data-sweetalert-delete data-title="Delete!"
                                                 data-text="Are you sure you want to delete {{ $permission->name }}?">Delete</a>
                                         </td>
@@ -84,8 +82,8 @@
             document.getElementById('paginationDropdown').addEventListener('change', function() {
                 var selectedPage = this.value;
                 var url = new URL(window.location.href);
-                url.searchParams.set('page', selectedPage); // Ganti query parameter "page" dengan halaman terpilih
-                window.location.href = url.href; // Redirect ke URL baru
+                url.searchParams.set('page', selectedPage);
+                window.location.href = url.href;
             });
         </script>
     @endpush

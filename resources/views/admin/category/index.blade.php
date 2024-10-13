@@ -4,7 +4,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="text-dark text-capitalize fw-bold fs-1">Permission category (Hak Akses)</div>
             <div>
-                <a href="#" class="btn btn-secondary me-2">
+                <a href="" class="btn btn-secondary me-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
@@ -13,7 +13,7 @@
                     </svg>
                     Refresh
                 </a>
-                <a href="{{ route('permissions.create') }}" class="btn btn-primary">
+                <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-plus-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
@@ -30,14 +30,14 @@
                 <div class="card rounded-2 mx-auto">
                     <div class="d-flex justify-content-between align-items-center p-3">
                         <div class="text-dark fw-bold d-flex align-items-center">
-                            {{-- <select class="form-select me-2" id="paginationDropdown" style="width: auto;">
-                                @for ($i = 1; $i <= $permissions->lastPage(); $i++)
+                            <select class="form-select me-2" id="paginationDropdown" style="width: auto;">
+                                @for ($i = 1; $i <= $categories->lastPage(); $i++)
                                     <option value="{{ $i }}"
-                                        {{ $i == $permissions->currentPage() ? 'selected' : '' }}>
+                                        {{ $i == $categories->currentPage() ? 'selected' : '' }}>
                                         Page {{ $i }}
                                     </option>
                                 @endfor
-                            </select> --}}
+                            </select>
                         </div>
                         <!-- Pencarian -->
                         <form action="" method="GET">
@@ -56,21 +56,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($permissions as $permission)
+                                @foreach ($categories as $kategory)
                                     <tr>
                                         <th class="text-center">{{ $loop->iteration }}</th>
-                                        <td>{{ $permission->name }}</td>
-                                        <td>{{ $permission->name }}</td>
+                                        <td>{{ $kategory->name }}</td>
+                                        <td>
+                                            @if ($kategory->permissions->isNotEmpty())
+                                                <ul>
+                                                    @foreach ($kategory->permissions as $permission)
+                                                        <li>{{ $permission->name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @else
+                                                <span>No permissions assigned</span>
+                                            @endif
+                                        </td>
                                         <td class="d-flex justify-content-center">
-                                            <a href="{{ route('permissions.edit', $permission->id) }}"
-                                                class="btn btn-primary mx-2">Edit</a>
+                                            <a href="{{ route('admin.categories.edit', $kategory->id) }}"
 
-                                            <a href="{{ route('permissions.destroy', $permission->id) }}"
+                                                class="btn btn-success mx-2"><i class="fa-regular fa-pen-to-square"></i></a>
+
+                                            <a href="{{ route('admin.categories.destroy', $kategory->id) }}"
                                                 class="btn btn-danger" data-sweetalert-delete data-title="Delete!"
-                                                data-text="Are you sure you want to delete {{ $permission->name }}?">Delete</a>
+                                                data-text="Are you sure you want to delete {{ $kategory->name }}?"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="" class="btn btn-primary mx-2"><i
+                                                    class="fa-solid fa-key me-3"></i>permision</a>
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -78,15 +91,4 @@
             </div>
         </div>
     </div>
-
-    {{-- @push('scripts')
-        <script>
-            document.getElementById('paginationDropdown').addEventListener('change', function() {
-                var selectedPage = this.value;
-                var url = new URL(window.location.href);
-                url.searchParams.set('page', selectedPage); // Ganti query parameter "page" dengan halaman terpilih
-                window.location.href = url.href; // Redirect ke URL baru
-            });
-        </script>
-    @endpush --}}
 </x-app-layout>

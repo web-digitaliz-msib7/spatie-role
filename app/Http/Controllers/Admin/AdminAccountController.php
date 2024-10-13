@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 
-class SuperAdminController extends Controller
+class AdminAccountController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        Gate::authorize('view-admin-account');
+
         $users = User::role('admin')->with('permissions')->get();
         $permissions = Permission::all();
         return view('admin.account.index', compact('users', 'permissions'));
@@ -25,9 +28,10 @@ class SuperAdminController extends Controller
      */
     public function create()
     {
-        $users = User::role('admin')->with('permissions')->get();
+        Gate::authorize('create-admin-account');
+
         $permissions = Permission::all();
-        return view('admin.account.create', compact('permissions', 'users'));
+        return view('admin.account.index', compact('permissions'));
     }
 
     /**
@@ -35,6 +39,8 @@ class SuperAdminController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create-admin-account');
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -56,14 +62,14 @@ class SuperAdminController extends Controller
             $user->permissions()->sync($request->permissions);
         }
 
-        return to_route('admin-accounts.index')->with('success', 'Account Created Successfully');
+        return to_route('admin.accounts')->with('success', 'Account Created Successfully');
     }
 
 
     /**
      * Display the specified resource.
      */
-    public function show(string $admin_account)
+    public function show(string $id)
     {
         //
     }
@@ -71,22 +77,27 @@ class SuperAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $admin_account)
+    public function edit(User $adminAccount)
     {
+        Gate::authorize('edit-admin-account');
+
         $permissions = Permission::all();
-        $userPermissions = $admin_account->permissions->pluck('id')->toArray();
-        return view('admin.account.edit', compact('admin_account', 'permissions', 'userPermissions'));
+        $userPermissions = $adminAccount->permissions->pluck('id')->toArray();
+
+        return view('admin.account.edit', compact('adminAccount', 'permissions', 'userPermissions'));
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $admin_account)
+    public function update(Request $request, User $adminAccount)
     {
+        Gate::authorize('edit-admin-account');
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $admin_account->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $adminAccount->id,
             'old_password' => 'nullable|string|min:8',
             'password' => 'nullable|string|min:8|confirmed',
             'permissions' => 'array', // Validasi permissions
@@ -94,36 +105,43 @@ class SuperAdminController extends Controller
         ]);
 
         // Pastikan pengguna memasukkan old_password jika mengubah password
-        if ($request->old_password && !Hash::check($request->old_password, $admin_account->password)) {
+        if ($request->old_password && !Hash::check($request->old_password, $adminAccount->password)) {
             return back()->withErrors(['old_password' => 'Old password is incorrect.']);
         }
 
         // Update user data
-        $admin_account->name = $request->name;
-        $admin_account->email = $request->email;
+        $adminAccount->name = $request->name;
+        $adminAccount->email = $request->email;
 
         // Update password hanya jika diisi
         if ($request->filled('password')) {
-            $admin_account->password = Hash::make($request->password);
+            $adminAccount->password = Hash::make($request->password);
         }
 
-        $admin_account->save();
+        $adminAccount->save();
 
         // Sinkronisasi permissions
         $permissions = Permission::whereIn('id', $request->permissions ?? [])->pluck('name');
-        $admin_account->syncPermissions($permissions);
+        $adminAccount->syncPermissions($permissions);
 
-        return redirect()->route('admin-accounts.index')->with('success', 'Account updated successfully.');
+        return redirect()->route('admin.accounts')->with('success', 'Account updated successfully.');
     }
-
-
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $admin_account)
+    public function destroy(User $adminAccount)
     {
-        $admin_account->delete();
-        return redirect()->route('admin-accounts.index')->with('success', 'Account deleted successfully');
+        Gate::authorize('delete-admin-account');
+
+        $adminAccount->delete();
+        return redirect()->route('admin.accounts')->with('success', 'Account deleted successfully');
+    }
+
+    public function suspend(User $adminAccount)
+    {
+        $adminAccount->suspend();
+
+        return back();
     }
 }

@@ -14,7 +14,9 @@
         </div>
         <div class="table-responsive pt-10">
             <div class="pb-5">
+                @can('create-admin-account')
                 <a href="{{ route('admin-accounts.create') }}" class="btn btn-primary">Create</a>
+                @endcan
                 <x-alert.error-validation />
             </div>
             <table class="table text-nowrap mb-0">
@@ -44,13 +46,17 @@
                                     <span class="badge bg-info">{{ $permission->name }}</span>
                                 @endforeach
                             </td>
-                            <td class="d-flex justify-content-center" >
+                            <td>
+                                @can('edit-admin-account')
                                 <a href="{{ route('admin-accounts.edit', $user->id) }}" class="btn btn-primary mx-2">
                                     Edit
                                 </a>
+                                @endcan
+                                @can('delete-admin-account')
                                 <a href="{{ route('admin-accounts.destroy', $user->id) }}" class="btn btn-danger"
                                     data-sweetalert-delete data-title="Delete!"
                                     data-text="Are you sure you want to delete {{ $user->name }}?">Delete</a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

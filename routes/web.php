@@ -37,11 +37,11 @@ Route::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('adm
 
     Route::get('/orders', function () {
         return view('admin.order.index');
-    })->name('orders')->middleware('permission:show-order');
+    })->name('orders')->middleware('permission:view-order');
 
     Route::get('/users', function () {
         return view('admin.user.index');
-    })->name('users')->middleware('permission:show-user');
+    })->name('users')->middleware('permission:view-user');
 
     Route::resource('admin-accounts', AdminAccountController::class);
     Route::post('/admin-accounts/{admin_account}/suspend', [AdminAccountController::class, 'suspend'])->name('admin-accounts.suspend');

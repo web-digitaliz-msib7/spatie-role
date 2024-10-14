@@ -4,7 +4,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="text-dark text-capitalize fw-bold fs-1">Admin Account</div>
             <div>
-                <a href="#" class="btn btn-secondary me-2">
+                <a href="" class="btn btn-secondary me-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
@@ -13,6 +13,7 @@
                     </svg>
                     Refresh
                 </a>
+                @can('create-admin-account')
                 <a href="{{ route('admin.admin-accounts.create') }}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -22,6 +23,7 @@
                     </svg>
                     Add
                 </a>
+                @endcan
             </div>
         </div>
         <div class="row">

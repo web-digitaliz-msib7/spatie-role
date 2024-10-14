@@ -15,8 +15,7 @@
                 <!-- card -->
                 <div class="card rounded-2 mx-auto">
                     <div class="d-flex justify-content-between align-items-center p-3">
-                        <form action="{{ route('admin.admin-accounts.store') }}" method="POST" class="w-100">
-                            @csrf
+                        <x-form.form action="{{ route('admin.admin-accounts.store') }}" class="w-100">
                             <div class="row">
                                 <!-- Form Input User di Kiri -->
                                 <div class="col-xl-4 col-lg-4 col-md-4 col-12">
@@ -83,7 +82,7 @@
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </div>
-                        </form>
+                        </x-form.form>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
-@props(['action'])
-<form action="{{ $action }}" method="POST">
+@props(['action', 'class' => ' '])
+<form action="{{ $action }}" method="POST" class="{{ $class }}">
     @csrf
     {{ $slot }}
 </form>

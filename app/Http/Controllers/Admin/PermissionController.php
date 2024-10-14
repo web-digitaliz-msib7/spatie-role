@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PermissonRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
     public function index()
     {
-        // Gate::authorize('view-permission');
+        Gate::authorize('view-permission');
         $permissions = Permission::paginate(10);
         return view('admin.permission.index', compact('permissions'));
     }
@@ -21,15 +21,16 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        Gate::authorize('view-permission');
         return view('admin.permission.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PermissonRequest $request)
+    public function store(Request $request)
     {
-        $request->validated();
+        $request->validate(['name' => 'required|unique:permissions,name']);
         Permission::create($request->all());
         return redirect()->route('admin.permissions.index')->with('success', 'Permission created successfully');
     }
@@ -53,16 +54,12 @@ class PermissionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PermissonRequest $request, Permission $permission)
+    public function update(Request $request, Permission $permission)
     {
-        $request->validated();
+        $request->validate(['name' => 'required|string|max:255']);
         $permission->update($request->all());
         return redirect()->route('admin.permissions.index')->with('success', 'Permission updated successfully');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Permission $permission)
     {
         $permission->delete();

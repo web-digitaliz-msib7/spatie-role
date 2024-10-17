@@ -4,6 +4,7 @@
         <a class="navbar-brand" href="/">
             <img src="{{ asset('assets') }}/images/brand/logo/logo.svg" alt="" />
         </a>
+        
         <ul class="navbar-nav flex-column" id="sideNavbar">
             <li class="nav-item">
                 <a class="nav-link has-arrow" href="/">
@@ -28,6 +29,10 @@
                 </li>
             @endcan
 
+            <h6 class="navbar-heading text-muted px-3 mt-1">
+                <span>Account</span>
+            </h6>
+
             @can('view-user')
                 <li class="nav-item">
                     <a class="nav-link has-arrow" href="{{ route('admin.users') }}">
@@ -43,6 +48,10 @@
                     </a>
                 </li>
             @endcan
+
+            <h6 class="navbar-heading text-muted px-3 mt-1">
+                <span>Middleware</span>
+            </h6>
 
             @role('super-admin')
                 <li class="nav-item">

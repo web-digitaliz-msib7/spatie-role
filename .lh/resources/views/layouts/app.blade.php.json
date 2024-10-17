@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1728091290039,
@@ -16,6 +16,10 @@
                 {
                     "date": 1728091321145,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,31 @@\n+<!doctype html>\n+<html lang=\"{{ str_replace('_', '-', app()->getLocale()) }}\">\n+\n+<head>\n+    @include('includes.meta')\n+    @include('includes.styles')\n+    @stack('styles')\n+</head>\n+\n+<body>\n+    <div id=\"db-wrapper\">\n+        <!-- navbar vertical -->\n+        @auth\n+            @include('includes.navbar-vertical')\n+\n+            <div id=\"page-content\">\n+\n+                @include('includes.header')\n+            @endauth\n+\n+            {{ $slot }}\n+\n+            @include('includes.footer')\n+        </div>\n+    </div>\n+    <!-- Scripts -->\n+    @include('includes.scripts')\n+    @stack('scripts')\n+</body>\n+\n+</html>\n"
+                },
+                {
+                    "date": 1729127416978,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     <div id=\"db-wrapper\">\n         <!-- navbar vertical -->\n     @include('includes.actions.sweetalert-delete')\n         @auth\n-            @include('includes.navbar')\n+            @include('includes.sidebar')\n \n             <div id=\"page-content\">\n \n                 @include('includes.header')\n"
                 }
             ],
             "date": 1728091290039,

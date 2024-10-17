@@ -12,7 +12,7 @@
         <!-- navbar vertical -->
     @include('includes.actions.sweetalert-delete')
         @auth
-            @include('includes.navbar')
+            @include('includes.sidebar')
 
             <div id="page-content">
 

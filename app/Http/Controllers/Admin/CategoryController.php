@@ -12,9 +12,11 @@ class CategoryController extends Controller
 
     public function index()
     {
+        $params = request()->query();
         $categories = category::with('permissions')
-        ->paginate(1);
-        return view('admin.category.index', compact('categories'));
+        ->filter($params)
+        ->paginate(10);
+        return view('admin.category.index', compact('categories', 'params'));
     }
 
     /**

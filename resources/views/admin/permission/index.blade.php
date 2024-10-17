@@ -41,8 +41,11 @@
                         </div>
                         <!-- Pencarian -->
                         <form action="" method="GET">
-                            <input type="text" class="form-control" placeholder="Search...">
+                            <input type="text" class="form-control" name="search" placeholder="Search..."
+                                value="{{ request('search') }}">
+                            <button type="submit" class="btn btn-primary">Search</button>
                         </form>
+
                     </div>
 
                     <div class="table-responsive pt-3">
@@ -61,12 +64,13 @@
                                         <td>{{ $permission->name }}</td>
                                         <td class="d-flex justify-content-center">
                                             <a href="{{ route('admin.permissions.edit', $permission->id) }}"
-                                                class="btn btn-success mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                class="btn btn-success mx-2"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
 
                                             <a href="{{ route('admin.permissions.destroy', $permission->id) }}"
                                                 class="btn btn-danger" data-sweetalert-delete data-title="Delete!"
                                                 data-text="Are you sure you want to delete {{ $permission->name }}?"><i
-                                                class="fa-solid fa-trash"></i></a>
+                                                    class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

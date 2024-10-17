@@ -12,9 +12,15 @@ class PermissionController extends Controller
     public function index()
     {
         Gate::authorize('view-permission');
-        $permissions = Permission::paginate(10);
+        $search = request('search');
+        // belom di fix
+        $permissions = Permission::when($search, function ($query, $search) {
+            return $query->where('name', 'like', "%{$search}%");
+        })->paginate(10);
+
         return view('admin.permission.index', compact('permissions'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -38,9 +44,7 @@ class PermissionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $permission)
-    {
-    }
+    public function show(string $permission) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -48,7 +52,6 @@ class PermissionController extends Controller
     public function edit(Permission $permission)
     {
         return view('admin.permission.edit', compact('permission'));
-
     }
 
     /**

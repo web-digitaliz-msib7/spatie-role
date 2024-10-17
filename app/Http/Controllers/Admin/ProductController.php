@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.product.index');
+        $products = Product::all();
+        return view('admin.product.index', compact('products'));
     }
 
     /**
@@ -20,21 +23,22 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+       Product::create($request->validated());
+       return to_route('admin.products.index')->with('success', 'Product Created Successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
         //
     }
@@ -42,24 +46,26 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        return view('admin.product.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $product->update($request->validated());
+        return to_route('admin.products.index')->with('success', 'Product update Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return to_route('admin.products.index')->with('success', 'Product Deleted Successfully');
     }
 }

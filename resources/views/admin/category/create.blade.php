@@ -56,7 +56,7 @@
                             </div>
                             <!-- Tombol Submit di Tengah -->
                             <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-2"></i>Simpan</button>
                             </div>
                         </form>
                     </div>

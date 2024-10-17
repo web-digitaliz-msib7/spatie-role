@@ -99,17 +99,17 @@
                                                 <span class="badge bg-info">{{ $permission->name }}</span>
                                             @endforeach
                                         </td>
-                                        <td>
+                                        <td class="d-flex justify-content-center">
                                             @can('edit-admin-account')
                                                 <a href="{{ route('admin.admin-accounts.edit', $user->id) }}"
-                                                    class="btn btn-primary mx-2">
-                                                    Edit
+                                                    class="btn btn-success mx-2">
+                                                    <i class="fa-regular fa-pen-to-square"></i>
                                                 </a>
                                             @endcan
                                             @can('delete-admin-account')
                                                 <a href="{{ route('admin.admin-accounts.destroy', $user->id) }}"
                                                     class="btn btn-danger" data-sweetalert-delete data-title="Delete!"
-                                                    data-text="Are you sure you want to delete {{ $user->name }}?">Delete</a>
+                                                    data-text="Are you sure you want to delete {{ $user->name }}?"><i class="fa-solid fa-trash"></i></a>
                                             @endcan
                                         </td>
                                     </tr>

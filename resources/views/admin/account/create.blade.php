@@ -79,7 +79,7 @@
                                 </div>
 
                                 <div class="col-12 text-center mt-4">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-2"></i>Simpan</button>
                                 </div>
                             </div>
                         </x-form.form>
@@ -87,6 +87,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </x-app-layout>

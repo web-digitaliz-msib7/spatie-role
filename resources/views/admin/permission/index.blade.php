@@ -20,7 +20,7 @@
                         <path
                             d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                     </svg>
-                    Add Category
+                    Add Permision
                 </a>
             </div>
         </div>
@@ -61,11 +61,12 @@
                                         <td>{{ $permission->name }}</td>
                                         <td class="d-flex justify-content-center">
                                             <a href="{{ route('admin.permissions.edit', $permission->id) }}"
-                                                class="btn btn-primary mx-2">Edit</a>
+                                                class="btn btn-success mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
 
                                             <a href="{{ route('admin.permissions.destroy', $permission->id) }}"
                                                 class="btn btn-danger" data-sweetalert-delete data-title="Delete!"
-                                                data-text="Are you sure you want to delete {{ $permission->name }}?">Delete</a>
+                                                data-text="Are you sure you want to delete {{ $permission->name }}?"><i
+                                                class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

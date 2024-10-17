@@ -79,8 +79,6 @@
                                             <a href="{{ route('admin.categories.destroy', $kategory->id) }}"
                                                 class="btn btn-danger" data-sweetalert-delete data-title="Delete!"
                                                 data-text="Are you sure you want to delete {{ $kategory->name }}?"><i class="fa-solid fa-trash"></i></a>
-                                            <a href="" class="btn btn-primary mx-2"><i
-                                                    class="fa-solid fa-key me-3"></i>permision</a>
                                         </td>
                                     </tr>
                                 @endforeach

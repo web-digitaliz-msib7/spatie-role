@@ -12,8 +12,11 @@ class Product extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
+        'kode',
         'name',
+        'qty',
+        'produk_kategori',
         'harga',
-        'published',
+
     ];
 }

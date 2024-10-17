@@ -7,7 +7,7 @@
 
             <div class="modal-footer">
                 <a href="{{ route('admin.permissions.index') }}" class="btn btn-secondary">Cancel</a>
-                <x-button.btn class="btn btn-primary">Save changes</x-button.btn>
+                <x-button.btn class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-2"></i>Update</x-button.btn>
             </div>
         </x-form.form>
     </x-form.formCard>

@@ -96,7 +96,7 @@
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->qty }}</td>
                                         <td>{{ $product->produk_kategori }}</td>
-                                        <td>{{ $product->harga }}</td>
+                                        <td>{{ formatCurrency($product->harga) }}</td>
                                         <td>
                                             <a href="{{ route('admin.products.edit', $product->id) }}"
                                                 class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>

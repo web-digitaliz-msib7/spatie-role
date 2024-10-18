@@ -1,0 +1,50 @@
+{
+    "sourceFile": "app/Http/Requests/ProductRequest.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1729152242543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729152264097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     public function rules(): array\n     {\n         return [\n             'name' => 'required|string|max:255',\n-            'qty' => 'required|integer',\n             'harga' => 'required|integer',\n+            'gambar' => 'required|integer',\n         ];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729152284839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,10 @@\n     {\n         return [\n             'name' => 'required|string|max:255',\n             'harga' => 'required|integer',\n-            'gambar' => 'required|integer',\n+            'gambar' => 'required',\n+            'published' => 'required',\n+\n         ];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729152298985,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n         return [\n             'name' => 'required|string|max:255',\n             'harga' => 'required|integer',\n             'gambar' => 'required',\n-            'published' => 'required',\n+            'published' => 'required|boolean',\n \n         ];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729152421528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n         return [\n             'name' => 'required|string|max:255',\n             'harga' => 'required|integer',\n             'gambar' => 'required',\n-            'published' => 'required|boolean',\n+            'published' => 'boolean',\n \n         ];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729152677227,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     {\n         return [\n             'name' => 'required|string|max:255',\n             'harga' => 'required|integer',\n-            'gambar' => 'required',\n+            'gambar' => 'required|file|mimes:jpeg,png,jpg',\n             'published' => 'boolean',\n \n         ];\n     }\n"
+                },
+                {
+                    "date": 1729214053459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,8 @@\n     {\n         return [\n             'name' => 'required|string|max:255',\n             'harga' => 'required|integer',\n-            'gambar' => 'required|file|mimes:jpeg,png,jpg',\n             'published' => 'boolean',\n \n         ];\n     }\n"
+                },
+                {
+                    "date": 1729214062723,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n     {\n         return [\n             'name' => 'required|string|max:255',\n             'harga' => 'required|integer',\n+            'gambar' => 'required|file|mimes:jpeg,png,jpg',\n             'published' => 'boolean',\n \n         ];\n     }\n"
+                },
+                {
+                    "date": 1729216359261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     {\n         return [\n             'name' => 'required|string|max:255',\n             'harga' => 'required|integer',\n-            'gambar' => 'required|file|mimes:jpeg,png,jpg',\n+            'gambar' => 'file|mimes:jpeg,png,jpg',\n             'published' => 'boolean',\n \n         ];\n     }\n"
+                }
+            ],
+            "date": 1729152242543,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Requests;\n\nuse Illuminate\\Foundation\\Http\\FormRequest;\n\nclass ProductRequest extends FormRequest\n{\n    /**\n     * Determine if the user is authorized to make this request.\n     */\n    public function authorize(): bool\n    {\n        return true;\n    }\n\n    /**\n     * Get the validation rules that apply to the request.\n     *\n     * @return array<string, \\Illuminate\\Contracts\\Validation\\ValidationRule|array<mixed>|string>\n     */\n    public function rules(): array\n    {\n        return [\n            'name' => 'required|string|max:255',\n            'qty' => 'required|integer',\n            'harga' => 'required|integer',\n        ];\n    }\n}"
+        }
+    ]
+}

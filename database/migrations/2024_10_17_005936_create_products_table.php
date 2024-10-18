@@ -12,10 +12,7 @@ return new class extends Migration {
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
             $table->string('name');
-            $table->string('qty');
-            $table->string('produk_kategori');
             $table->integer('harga');
             $table->boolean('published')->default(false);
             $table->timestamps();

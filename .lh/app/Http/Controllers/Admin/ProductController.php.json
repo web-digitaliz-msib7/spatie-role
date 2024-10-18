@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/Http/Controllers/Admin/ProductController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1729151593785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729151977766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n      * Store a newly created resource in storage.\n      */\n     public function store(ProductRequest $request)\n     {\n-       Product::create($request->validated());\n+       $product = Product::create($request->validated());\n        return to_route('admin.products.index')->with('success', 'Product Created Successfully');\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1729151999011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,10 @@\n      */\n     public function store(ProductRequest $request)\n     {\n         $product = Product::create($request->validated());\n-       return to_route('admin.products.index')->with('success', 'Product Created Successfully');\n+\n+        return to_route('admin.products.index')->with('success', 'Product Created Successfully');\n     }\n \n     /**\n      * Display the specified resource.\n"
+                },
+                {
+                    "date": 1729152021320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n      */\n     public function store(ProductRequest $request)\n     {\n         $product = Product::create($request->validated());\n-\n+        $product->addMediaFromRequest('image')->toMediaCollection('image');\n         return to_route('admin.products.index')->with('success', 'Product Created Successfully');\n     }\n \n     /**\n"
+                }
+            ],
+            "date": 1729151593785,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Admin;\n\nuse App\\Http\\Controllers\\Controller;\nuse App\\Http\\Requests\\ProductRequest;\nuse App\\Models\\Product;\nuse Illuminate\\Http\\Request;\n\nclass ProductController extends Controller\n{\n    /**\n     * Display a listing of the resource.\n     */\n    public function index()\n    {\n        $products = Product::all();\n        return view('admin.product.index', compact('products'));\n    }\n\n    /**\n     * Show the form for creating a new resource.\n     */\n    public function create()\n    {\n        return view('admin.product.create');\n    }\n\n    /**\n     * Store a newly created resource in storage.\n     */\n    public function store(ProductRequest $request)\n    {\n       Product::create($request->validated());\n       return to_route('admin.products.index')->with('success', 'Product Created Successfully');\n    }\n\n    /**\n     * Display the specified resource.\n     */\n    public function show(Product $product)\n    {\n        //\n    }\n\n    /**\n     * Show the form for editing the specified resource.\n     */\n    public function edit(Product $product)\n    {\n        return view('admin.product.edit', compact('product'));\n    }\n\n    /**\n     * Update the specified resource in storage.\n     */\n    public function update(ProductRequest $request, Product $product)\n    {\n        $product->update($request->validated());\n        return to_route('admin.products.index')->with('success', 'Product update Successfully');\n    }\n\n    /**\n     * Remove the specified resource from storage.\n     */\n    public function destroy(Product $product)\n    {\n        $product->delete();\n        return to_route('admin.products.index')->with('success', 'Product Deleted Successfully');\n    }\n}"
+        }
+    ]
+}

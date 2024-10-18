@@ -22,11 +22,11 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kode' => 'required|string|max:255',
             'name' => 'required|string|max:255',
-            'qty' => 'required|integer',
-            'produk_kategori' => 'required|string|max:255',
             'harga' => 'required|integer',
+            'gambar' => 'file|mimes:jpeg,png,jpg',
+            'published' => 'boolean',
+
         ];
     }
 }

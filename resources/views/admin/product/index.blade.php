@@ -80,11 +80,11 @@
                             <thead class="table-secondary text-dark fw-bold">
                                 <tr>
                                     <th class="col">#</th>
-                                    <th class="col">kode</th>
+                                    <th class="col">ID</th>
                                     <th class="col">nama</th>
-                                    <th class="col">qyt</th>
-                                    <th class="col">Category</th>
                                     <th class="col">Harga</th>
+                                    <th class="col">Gambar</th>
+                                    <th class="col">Published</th>
                                     <th class="col">Action</th>
                                 </tr>
                             </thead>
@@ -92,11 +92,13 @@
                                 @forelse ($products as $product)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $product->kode }}</td>
+                                        <td>{{ $product->id }}</td>
                                         <td>{{ $product->name }}</td>
-                                        <td>{{ $product->qty }}</td>
-                                        <td>{{ $product->produk_kategori }}</td>
                                         <td>{{ formatCurrency($product->harga) }}</td>
+                                        <td>
+                                            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->name }}" style="max-width: 100px; max-height: 100px;">
+                                        </td>
+                                        <td>{{ $product->published }}</td>
                                         <td>
                                             <a href="{{ route('admin.products.edit', $product->id) }}"
                                                 class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>

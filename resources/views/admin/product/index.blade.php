@@ -96,11 +96,7 @@
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->harga }}</td>
                                         <td>
-                                            @if($product->hasMedia())
-                                                <img src="{{ $product->getFirstMediaUrl() }}" alt="{{ $product->name }}" style="max-width: 100px; max-height: 100px;">
-                                            @else
-                                                No Image
-                                            @endif
+                                            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->name }}" style="max-width: 100px; max-height: 100px;">
                                         </td>
                                         <td>{{ $product->published }}</td>
                                         <td>

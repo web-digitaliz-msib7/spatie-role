@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1729152242543,
@@ -36,6 +36,10 @@
                 {
                     "date": 1729214062723,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n     {\n         return [\n             'name' => 'required|string|max:255',\n             'harga' => 'required|integer',\n+            'gambar' => 'required|file|mimes:jpeg,png,jpg',\n             'published' => 'boolean',\n \n         ];\n     }\n"
+                },
+                {
+                    "date": 1729216359261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     {\n         return [\n             'name' => 'required|string|max:255',\n             'harga' => 'required|integer',\n-            'gambar' => 'required|file|mimes:jpeg,png,jpg',\n+            'gambar' => 'file|mimes:jpeg,png,jpg',\n             'published' => 'boolean',\n \n         ];\n     }\n"
                 }
             ],
             "date": 1729152242543,

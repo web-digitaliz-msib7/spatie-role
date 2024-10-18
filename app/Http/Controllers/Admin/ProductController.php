@@ -38,7 +38,7 @@ class ProductController extends Controller
         // Pastikan file gambar diupload
         if ($request->hasFile('gambar')) {
             $product = Product::create($validated);
-            $product->addMediaFromRequest('gambar')->usingName($product->name)->toMediaCollection();
+            $product->addMediaFromRequest('gambar')->usingName($product->name)->toMediaCollection('products');
             return to_route('admin.products.index')->with('success', 'Product Created Successfully');
         } else {
             return back()->withErrors(['gambar' => 'Gambar tidak ditemukan.']);
@@ -68,6 +68,11 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         $product->update($request->validated());
+        if ($request->hasFile('gambar')) {
+            $product->clearMediaCollection('products');
+            $product->addMediaFromRequest('gambar')->usingName($product->name)->toMediaCollection('products');
+            return to_route('admin.products.index')->with('success', 'Product Edited Successfully');
+        }
         return to_route('admin.products.index')->with('success', 'Product update Successfully');
     }
 

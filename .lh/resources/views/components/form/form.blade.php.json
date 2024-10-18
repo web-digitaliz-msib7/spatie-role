@@ -1,0 +1,26 @@
+{
+    "sourceFile": "resources/views/components/form/form.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1729152585166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729152594063,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n @props(['action', 'class' => ' '])\n-<form action=\"{{ $action }}\" method=\"POST\" class=\"{{ $class }} enctype=\"multipart/form-data\"\">\n+<form action=\"{{ $action }}\" method=\"POST\" class=\"{{ $class }}\">\n     @csrf\n     {{ $slot }}\n </form>\n"
+                },
+                {
+                    "date": 1729152741792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n @props(['action', 'class' => ' '])\n-<form action=\"{{ $action }}\" method=\"POST\" class=\"{{ $class }}\">\n+<form action=\"{{ $action }}\" method=\"POST\" class=\"{{ $class }}\" enctype=\"multipart/form-data\">\n     @csrf\n     {{ $slot }}\n </form>\n"
+                }
+            ],
+            "date": 1729152585166,
+            "name": "Commit-0",
+            "content": "@props(['action', 'class' => ' '])\n<form action=\"{{ $action }}\" method=\"POST\" class=\"{{ $class }} enctype=\"multipart/form-data\"\">\n    @csrf\n    {{ $slot }}\n</form>\n"
+        }
+    ]
+}

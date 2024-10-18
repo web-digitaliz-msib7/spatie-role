@@ -15,6 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+        // dd($products);
         return view('admin.product.index', compact('products'));
     }
 
@@ -31,9 +32,19 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-       Product::create($request->validated());
-       return to_route('admin.products.index')->with('success', 'Product Created Successfully');
+        // Validasi request
+        $validated = $request->validated();
+
+        // Pastikan file gambar diupload
+        if ($request->hasFile('gambar')) {
+            $product = Product::create($validated);
+            $product->addMediaFromRequest('gambar')->usingName($product->name)->toMediaCollection();
+            return to_route('admin.products.index')->with('success', 'Product Created Successfully');
+        } else {
+            return back()->withErrors(['gambar' => 'Gambar tidak ditemukan.']);
+        }
     }
+
 
     /**
      * Display the specified resource.

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 5,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1729128959074,
@@ -28,6 +28,14 @@
                 {
                     "date": 1729129022191,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,9 @@\n use Illuminate\\Database\\Migrations\\Migration;\n use Illuminate\\Database\\Schema\\Blueprint;\n use Illuminate\\Support\\Facades\\Schema;\n \n-return new class extends Migration\n-{\n+return new class extends Migration {\n     /**\n      * Run the migrations.\n      */\n     public function up(): void\n"
+                },
+                {
+                    "date": 1729151425178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,8 @@\n     public function up(): void\n     {\n         Schema::create('products', function (Blueprint $table) {\n             $table->id();\n-            $table->string('kode');\n             $table->string('name');\n             $table->string('qty');\n             $table->string('produk_kategori');\n             $table->integer('harga');\n@@ -28,5 +27,5 @@\n     public function down(): void\n     {\n         Schema::dropIfExists('products');\n     }\n-};\n+};\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729151449671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,8 @@\n     {\n         Schema::create('products', function (Blueprint $table) {\n             $table->id();\n             $table->string('name');\n-            $table->string('qty');\n             $table->string('produk_kategori');\n             $table->integer('harga');\n             $table->boolean('published')->default(false);\n             $table->timestamps();\n"
                 }
             ],
             "date": 1729128959074,

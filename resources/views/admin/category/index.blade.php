@@ -30,18 +30,20 @@
                 <div class="card rounded-2 mx-auto">
                     <div class="d-flex justify-content-between align-items-center p-3">
                         <div class="text-dark fw-bold d-flex align-items-center">
-                            <select class="form-select me-2" id="paginationDropdown" style="width: auto;">
-                                @for ($i = 1; $i <= $categories->lastPage(); $i++)
-                                    <option value="{{ $i }}"
-                                        {{ $i == $categories->currentPage() ? 'selected' : '' }}>
-                                        Page {{ $i }}
-                                    </option>
-                                @endfor
-                            </select>
+                            <div class="text-dark fw-bold d-flex align-items-center">
+                                <select class="form-select me-2" id="paginationDropdown" style="width: auto;">
+                                    @for ($i = 1; $i <= $categories->lastPage(); $i++)
+                                        <option value="{{ $i }}"
+                                            {{ $i == $categories->currentPage() ? 'selected' : '' }}>
+                                            Page {{ $i }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
                         </div>
                         <!-- Pencarian -->
                         <form action="" method="GET">
-                            <input type="text" class="form-control" placeholder="Search...">
+                            <input type="text" name="search" class="form-control" placeholder="Search...">
                         </form>
                     </div>
 
@@ -56,7 +58,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $kategory)
+                                @forelse ($categories as $kategory)
                                     <tr>
                                         <th class="text-center">{{ $loop->iteration }}</th>
                                         <td>{{ $kategory->name }}</td>
@@ -73,20 +75,37 @@
                                         </td>
                                         <td class="d-flex justify-content-center">
                                             <a href="{{ route('admin.categories.edit', $kategory->id) }}"
-
-                                                class="btn btn-success mx-2"><i class="fa-regular fa-pen-to-square"></i></a>
+                                                class="btn btn-success mx-2"><i
+                                                    class="fa-regular fa-pen-to-square"></i></a>
 
                                             <a href="{{ route('admin.categories.destroy', $kategory->id) }}"
                                                 class="btn btn-danger" data-sweetalert-delete data-title="Delete!"
-                                                data-text="Are you sure you want to delete {{ $kategory->name }}?"><i class="fa-solid fa-trash"></i></a>
+                                                data-text="Are you sure you want to delete {{ $kategory->name }}?"><i
+                                                    class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <div class="text-center">
+                                        <p>Data tidak di temukan</p>
+                                        <a href="{{ route('admin.categories.index') }}" class="btn btn-primary mb-10">back</a>
+                                    </div>
+                                @endforelse
                             </tbody>
                         </table>
+                        {{ $categories->withQueryString()->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            document.getElementById('paginationDropdown').addEventListener('change', function() {
+                var selectedPage = this.value;
+                var url = new URL(window.location.href);
+                url.searchParams.set('page', selectedPage);
+                window.location.href = url.href;
+            });
+        </script>
+    @endpush
 </x-app-layout>

@@ -94,9 +94,10 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $product->id }}</td>
                                         <td>{{ $product->name }}</td>
-                                        <td>{{ $product->harga }}</td>
+                                        <td>{{ formatCurrency($product->harga) }}</td>
                                         <td>
-                                            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="{{ $product->name }}" style="max-width: 100px; max-height: 100px;">
+                                            <img src="{{ $product->getFirstMediaUrl('products') }}"
+                                                alt="{{ $product->name }}" style="max-width: 100px; max-height: 100px;">
                                         </td>
                                         <td>{{ $product->published }}</td>
                                         <td>

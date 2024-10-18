@@ -15,8 +15,12 @@ class AdminAccountController extends Controller
     public function index()
     {
         Gate::authorize('view-admin-account');
+        $params = request()->query();
 
-        $users = User::role('admin')->with('permissions')->get();
+        $users = User::role('admin')
+            ->with('permissions')
+            ->filter($params)
+            ->paginate(10);
         $permissions = Permission::all();
         return view('admin.account.index', compact('users', 'permissions'));
     }

@@ -45,4 +45,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function scopeFilter($query, $params)
+    {
+        // search for budget item
+        $query->when(@$params['search'], function ($query, $search) {
+            $query->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('email', 'LIKE', "%{$search}%");
+        });
+    }
 }

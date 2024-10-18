@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->integer('harga');
-            $table->boolean('published')->default(false);
+            $table->boolean('published')->default(false)->nullable();
             $table->timestamps();
         });
     }

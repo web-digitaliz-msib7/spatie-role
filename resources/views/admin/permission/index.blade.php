@@ -43,7 +43,7 @@
                         <form action="" method="GET">
                             <input type="text" class="form-control" name="search" placeholder="Search..."
                                 value="{{ request('search') }}">
-                            <button type="submit" class="btn btn-primary">Search</button>
+                            {{-- <button type="submit" class="btn btn-primary">Search</button> --}}
                         </form>
 
                     </div>

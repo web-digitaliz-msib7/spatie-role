@@ -14,8 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        // dd($products);
+        $params = request()->query();
+        $products = Product::filter($params)->get();
         return view('admin.product.index', compact('products'));
     }
 

@@ -1,0 +1,26 @@
+{
+    "sourceFile": "routes/web.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1729309805567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729309818205,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n Route::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('admin')->group(function () {\n     Route::get('/dashboard', [HomeController::class, 'adminDashboard'])->name('dashboard');\n \n     Route::resource('products', ProductController::class);\n-\n+    Route::patch('/admin/products/{product}/publish', [ProductController::class, 'updatePublishStatus']);\n     Route::get('/orders', function () {\n         return view('admin.order.index');\n     })->name('orders')->middleware('permission:view-order');\n \n@@ -49,7 +49,5 @@\n     Route::middleware(['role:super-admin'])->group(function () {\n         Route::resource('permissions', PermissionController::class);\n         Route::resource('categories', CategoryController::class);\n     });\n-});\n-\n-Route::patch('/admin/products/{product}/publish', [ProductController::class, 'updatePublishStatus']);\n\\ No newline at end of file\n+});\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729309883604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n Route::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('admin')->group(function () {\n     Route::get('/dashboard', [HomeController::class, 'adminDashboard'])->name('dashboard');\n \n     Route::resource('products', ProductController::class);\n-    Route::patch('/admin/products/{product}/publish', [ProductController::class, 'updatePublishStatus']);\n+\n     Route::get('/orders', function () {\n         return view('admin.order.index');\n     })->name('orders')->middleware('permission:view-order');\n \n"
+                }
+            ],
+            "date": 1729309805567,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse App\\Http\\Controllers\\Admin\\AdminAccountController;\nuse App\\Http\\Controllers\\HomeController;\nuse App\\Http\\Controllers\\Admin\\CategoryController;\nuse App\\Http\\Controllers\\Admin\\PermissionController;\nuse App\\Http\\Controllers\\Admin\\ProductController;\nuse Illuminate\\Support\\Facades\\Auth;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::fallback(function () {\n    return view('errors.404');\n});\n\nAuth::routes();\n\nRoute::get('/', function () {\n    $user = Auth::user();\n\n    if ($user && ($user->hasRole('super-admin') || $user->hasRole('admin'))) {\n        return redirect()->route('admin.dashboard');\n    } elseif ($user && $user->hasRole('user')) {\n        return redirect()->route('user.dashboard');\n    }\n\n    return redirect('/login');\n})->middleware('auth')->name('home');\n\nRoute::middleware(['auth', 'role:user'])->group(function () {\n    Route::get('/user-dashboard', [HomeController::class, 'userDashboard'])->name('user.dashboard');\n});\n\nRoute::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('admin')->group(function () {\n    Route::get('/dashboard', [HomeController::class, 'adminDashboard'])->name('dashboard');\n\n    Route::resource('products', ProductController::class);\n\n    Route::get('/orders', function () {\n        return view('admin.order.index');\n    })->name('orders')->middleware('permission:view-order');\n\n    Route::get('/users', function () {\n        return view('admin.user.index');\n    })->name('users')->middleware('permission:view-user');\n\n    Route::resource('admin-accounts', AdminAccountController::class);\n    Route::post('/admin-accounts/{admin_account}/suspend', [AdminAccountController::class, 'suspend'])->name('admin-accounts.suspend');\n\n    Route::middleware(['role:super-admin'])->group(function () {\n        Route::resource('permissions', PermissionController::class);\n        Route::resource('categories', CategoryController::class);\n    });\n});\n\nRoute::patch('/admin/products/{product}/publish', [ProductController::class, 'updatePublishStatus']);"
+        }
+    ]
+}

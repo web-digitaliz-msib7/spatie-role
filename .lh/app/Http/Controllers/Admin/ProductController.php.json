@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Http/Controllers/Admin/ProductController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1729309839985,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729309875945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,21 +53,8 @@\n     {\n         //\n     }\n \n-    public function updatePublishStatus(Request $request, Product $product)\n-    {\n-        $request->validate([\n-            'published' => 'required|string|in:yes,no',\n-        ]);\n-\n-        $product->published = $request->published === 'yes' ? 1 : 0; // Atur nilai published sesuai input\n-        $product->save();\n-\n-        return response()->json(['success' => true, 'published' => $product->published]);\n-    }\n-\n-\n     /**\n      * Show the form for editing the specified resource.\n      */\n     public function edit(Product $product)\n"
+                }
+            ],
+            "date": 1729309839985,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Admin;\n\nuse App\\Http\\Controllers\\Controller;\nuse App\\Http\\Requests\\ProductRequest;\nuse App\\Models\\Product;\nuse Illuminate\\Http\\Request;\n\nclass ProductController extends Controller\n{\n    /**\n     * Display a listing of the resource.\n     */\n    public function index()\n    {\n        $params = request()->query();\n        $products = Product::filter($params)->get();\n        return view('admin.product.index', compact('products'));\n    }\n\n    /**\n     * Show the form for creating a new resource.\n     */\n    public function create()\n    {\n        return view('admin.product.create');\n    }\n\n    /**\n     * Store a newly created resource in storage.\n     */\n    public function store(ProductRequest $request)\n    {\n        // Validasi request\n        $validated = $request->validated();\n\n        // Pastikan file gambar diupload\n        if ($request->hasFile('gambar')) {\n            $product = Product::create($validated);\n            $product->addMediaFromRequest('gambar')->usingName($product->name)->toMediaCollection('products');\n            return to_route('admin.products.index')->with('success', 'Product Created Successfully');\n        } else {\n            return back()->withErrors(['gambar' => 'Gambar tidak ditemukan.']);\n        }\n    }\n\n\n    /**\n     * Display the specified resource.\n     */\n    public function show(Product $product)\n    {\n        //\n    }\n\n    public function updatePublishStatus(Request $request, Product $product)\n{\n    $request->validate([\n        'published' => 'required|string|in:yes,no',\n    ]);\n\n    $product->published = $request->published === 'yes' ? 1 : 0; // Atur nilai published sesuai input\n    $product->save();\n\n    return response()->json(['success' => true, 'published' => $product->published]);\n}\n\n\n    /**\n     * Show the form for editing the specified resource.\n     */\n    public function edit(Product $product)\n    {\n        return view('admin.product.edit', compact('product'));\n    }\n\n    /**\n     * Update the specified resource in storage.\n     */\n    public function update(ProductRequest $request, Product $product)\n    {\n        $product->update($request->validated());\n        if ($request->hasFile('gambar')) {\n            $product->clearMediaCollection('products');\n            $product->addMediaFromRequest('gambar')->usingName($product->name)->toMediaCollection('products');\n            return to_route('admin.products.index')->with('success', 'Product Edited Successfully');\n        }\n        return to_route('admin.products.index')->with('success', 'Product update Successfully');\n    }\n\n    /**\n     * Remove the specified resource from storage.\n     */\n    public function destroy(Product $product)\n    {\n        $product->delete();\n        return to_route('admin.products.index')->with('success', 'Product Deleted Successfully');\n    }\n}"
+        }
+    ]
+}

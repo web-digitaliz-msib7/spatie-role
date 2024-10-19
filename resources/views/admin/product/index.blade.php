@@ -97,23 +97,32 @@
                                         <td>{{ formatCurrency($product->harga) }}</td>
                                         <td>
                                             <img src="{{ $product->getFirstMediaUrl('products') }}"
-                                                alt="{{ $product->name }}" style="max-width: 100px; max-height: 100px;">
+                                                 alt="{{ $product->name }}" style="max-width: 100px; max-height: 100px;">
                                         </td>
-                                        <td>{{ $product->published }}</td>
                                         <td>
-                                            <a href="{{ route('admin.products.edit', $product->id) }}"
-                                                class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
-
-                                            <a href="{{ route('admin.products.destroy', $product->id) }}"
-                                                class="btn btn-danger" data-sweetalert-delete data-title="Delete!"
-                                                data-text="Are you sure you want to delete {{ $product->name }}?"><i
-                                                    class="fa-solid fa-trash"></i></a>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" style="border: 1px solid #5b5a63" type="checkbox" role="switch" id="flexSwitchCheck{{ $product->id }}" 
+                                                    {{ $product->published == 'yes' || $product->published == 1 ? 'checked' : '' }} disabled>
+                                                <label class="form-check-label" for="flexSwitchCheck{{ $product->id }}">
+                                                    {{ $product->published == 'yes' || $product->published == 1 ? 'Published' : 'Not Published' }}
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-primary">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <a href="{{ route('admin.products.destroy', $product->id) }}" class="btn btn-danger" 
+                                               data-sweetalert-delete data-title="Delete!" 
+                                               data-text="Are you sure you want to delete {{ $product->name }}?">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty
                                     <p>Produk Belom tersedia</p>
                                 @endforelse
-                            </tbody>
+                            </tbody>                            
                         </table>
                     </div>
                 </div>

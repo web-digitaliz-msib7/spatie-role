@@ -29,11 +29,11 @@
                 </li>
             @endcan
 
+            
+            @can('view-user')
             <h6 class="navbar-heading text-muted px-3 mt-1">
                 <span>Account</span>
             </h6>
-
-            @can('view-user')
                 <li class="nav-item">
                     <a class="nav-link has-arrow" href="{{ route('admin.users') }}">
                         <i class="fa-solid fa-users nav-icon icon-xs me-2"></i> Users
@@ -49,11 +49,11 @@
                 </li>
             @endcan
 
+            
+            @role('super-admin')
             <h6 class="navbar-heading text-muted px-3 mt-1">
                 <span>Middleware</span>
             </h6>
-
-            @role('super-admin')
                 <li class="nav-item">
                     <a class="nav-link has-arrow" href="{{ route('admin.categories.index') }}">
                         <i class="fa-solid fa-list nav-icon icon-xs me-2"></i> Category

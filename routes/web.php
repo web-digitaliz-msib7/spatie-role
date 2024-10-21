@@ -4,7 +4,8 @@ use App\Http\Controllers\Admin\AdminAccountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\User\ProductController as UserProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,14 +27,20 @@ Route::get('/', function () {
     return redirect('/login');
 })->middleware('auth')->name('home');
 
+// Rute untuk pengguna
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user-dashboard', [HomeController::class, 'userDashboard'])->name('user.dashboard');
+
+    // Rute untuk produk
+    Route::get('/products', [UserProductController::class, 'index'])->name('products.index');
+    Route::get('/products/{product}', [UserProductController::class, 'show'])->name('products.show');
 });
 
+// Rute untuk admin
 Route::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('admin')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'adminDashboard'])->name('dashboard');
 
-    Route::resource('products', ProductController::class);
+    Route::resource('products', AdminProductController::class); // Menggunakan alias untuk membedakan
 
     Route::get('/orders', function () {
         return view('admin.order.index');

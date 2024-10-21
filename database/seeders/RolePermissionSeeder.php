@@ -28,6 +28,6 @@ class RolePermissionSeeder extends Seeder
         $roleSuperAdmin->givePermissionTo(Permission::all());
         // $roleAdmin->givePermissionTo(['view-product', 'view-order', 'view-user']);
 
-        // $roleUser->givePermissionTo('view-product');
+        $roleUser->givePermissionTo('view-product');
     }
 }

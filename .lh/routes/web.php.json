@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1729309805567,
@@ -16,6 +16,14 @@
                 {
                     "date": 1729309883604,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n Route::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('admin')->group(function () {\n     Route::get('/dashboard', [HomeController::class, 'adminDashboard'])->name('dashboard');\n \n     Route::resource('products', ProductController::class);\n-    Route::patch('/admin/products/{product}/publish', [ProductController::class, 'updatePublishStatus']);\n+\n     Route::get('/orders', function () {\n         return view('admin.order.index');\n     })->name('orders')->middleware('permission:view-order');\n \n"
+                },
+                {
+                    "date": 1729476708617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,10 @@\n use App\\Http\\Controllers\\Admin\\AdminAccountController;\n use App\\Http\\Controllers\\HomeController;\n use App\\Http\\Controllers\\Admin\\CategoryController;\n use App\\Http\\Controllers\\Admin\\PermissionController;\n-use App\\Http\\Controllers\\Admin\\ProductController;\n+use App\\Http\\Controllers\\Admin\\ProductController as AdminProductController;\n+use App\\Http\\Controllers\\User\\ProductController as UserProductController;\n use Illuminate\\Support\\Facades\\Auth;\n use Illuminate\\Support\\Facades\\Route;\n \n Route::fallback(function () {\n@@ -25,16 +26,22 @@\n \n     return redirect('/login');\n })->middleware('auth')->name('home');\n \n+// Rute untuk pengguna\n Route::middleware(['auth', 'role:user'])->group(function () {\n     Route::get('/user-dashboard', [HomeController::class, 'userDashboard'])->name('user.dashboard');\n+    \n+    // Rute untuk produk\n+    Route::get('/products', [UserProductController::class, 'index'])->name('products.index');\n+    Route::get('/products/{product}', [UserProductController::class, 'show'])->name('products.show');\n });\n \n+// Rute untuk admin\n Route::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('admin')->group(function () {\n     Route::get('/dashboard', [HomeController::class, 'adminDashboard'])->name('dashboard');\n \n-    Route::resource('products', ProductController::class);\n+    Route::resource('products', AdminProductController::class); // Menggunakan alias untuk membedakan\n \n     Route::get('/orders', function () {\n         return view('admin.order.index');\n     })->name('orders')->middleware('permission:view-order');\n"
+                },
+                {
+                    "date": 1729477238648,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n \n // Rute untuk pengguna\n Route::middleware(['auth', 'role:user'])->group(function () {\n     Route::get('/user-dashboard', [HomeController::class, 'userDashboard'])->name('user.dashboard');\n-    \n+\n     // Rute untuk produk\n     Route::get('/products', [UserProductController::class, 'index'])->name('products.index');\n     Route::get('/products/{product}', [UserProductController::class, 'show'])->name('products.show');\n });\n"
                 }
             ],
             "date": 1729309805567,

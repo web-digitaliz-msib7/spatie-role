@@ -12,13 +12,20 @@
                     Dashboard
                 </a>
             </li>
-            @can('view-product')
+            @can('view-product|admin')
                 <li class="nav-item">
                     <a class="nav-link has-arrow" href="{{ route('admin.products.index') }}">
                         <i class="fa-solid fa-shirt nav-icon icon-xs me-2"></i> Product
                     </a>
                 </li>
             @endcan
+            @role('user')
+                <li class="nav-item">
+                    <a class="nav-link has-arrow" href="{{ route('products.index') }}">
+                        <i class="fa-solid fa-shirt nav-icon icon-xs me-2"></i> Product
+                    </a>
+                </li>
+            @endrole
             {{-- @endif --}}
             @can('view-order')
                 <li class="nav-item">

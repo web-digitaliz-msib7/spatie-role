@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\OrderController as UserOrderController;
+use App\Http\Controllers\OrderController as adminOrderdController;
 use App\Http\Controllers\User\ProductController as UserProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +36,9 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     // Rute untuk produk
     Route::get('/products', [UserProductController::class, 'index'])->name('products.index');
     Route::get('/products/{product}', [UserProductController::class, 'show'])->name('products.show');
+
+    Route::get('/products/{product}/create/order', [UserOrderController::class, 'create'])->name('products.order.create');
+    Route::post('/products/{product}/order', [UserOrderController::class, 'store'])->name('products.order.store');
 });
 
 // Rute untuk admin
@@ -42,9 +47,7 @@ Route::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('adm
 
     Route::resource('products', AdminProductController::class); // Menggunakan alias untuk membedakan
 
-    Route::get('/orders', function () {
-        return view('admin.order.index');
-    })->name('orders')->middleware('permission:view-order');
+    Route::get('/orders', [adminOrderdController::class, 'index'])->name('orders')->middleware('permission:view-order');
 
     Route::get('/users', function () {
         return view('admin.user.index');

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CategoryProductEnum;
 use App\Enums\PublishedEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,5 +33,10 @@ class Product extends Model implements HasMedia
         $query->when(@$params['search'], function ($query, $search) {
             $query->where('name', 'LIKE', "%{$search}%");
         });
+    }
+
+    public function productDescription(): Attribute
+    {
+        return Attribute::make(fn() => $this->CategoryProduct ? CategoryProductEnum::getDescription((int) $this->CategoryProduct) : null);
     }
 }

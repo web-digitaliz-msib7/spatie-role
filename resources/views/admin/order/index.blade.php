@@ -78,46 +78,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>PRD001</td>
-                                    <td>Produk A</td>
-                                    <td>10</td>
-                                    <td>Elektronik</td>
-                                    <td>Rp 1,500,000</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>PRD002</td>
-                                    <td>Produk B</td>
-                                    <td>5</td>
-                                    <td>Fashion</td>
-                                    <td>Rp 300,000</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>PRD003</td>
-                                    <td>Produk C</td>
-                                    <td>20</td>
-                                    <td>Kesehatan</td>
-                                    <td>Rp 200,000</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>PRD004</td>
-                                    <td>Produk D</td>
-                                    <td>8</td>
-                                    <td>Peralatan Rumah</td>
-                                    <td>Rp 850,000</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>PRD005</td>
-                                    <td>Produk E</td>
-                                    <td>15</td>
-                                    <td>Kecantikan</td>
-                                    <td>Rp 450,000</td>
-                                </tr>
+                                @forelse ($orders as $order)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$order->id}}</td>
+                                        <td>{{$order->name}}</td>
+                                        <td>{{$order->qty}}</td>
+                                        <td>Elektronik</td>
+                                        <td>{{formatCurrency($order->product->harga)}}</td>
+                                    </tr>
+                                @empty
+                                <p>Data tidak di temukan</p>
+                                @endforelse
+
                             </tbody>
                         </table>
                     </div>

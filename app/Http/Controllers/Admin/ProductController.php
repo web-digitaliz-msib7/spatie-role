@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         $params = request()->query();
-        $products = Product::filter($params)->get();
+        $products = Product::filter($params)->paginate(1);
         return view('admin.product.index', compact('products'));
     }
 

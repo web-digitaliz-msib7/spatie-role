@@ -91,7 +91,7 @@
                             <tbody>
                                 @forelse ($products as $product)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $products->firstItem() + $loop->index }}</td>
                                         <td>{{ $product->id }}</td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ formatCurrency($product->harga) }}</td>
@@ -124,6 +124,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>

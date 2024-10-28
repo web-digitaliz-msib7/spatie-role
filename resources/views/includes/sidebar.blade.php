@@ -4,7 +4,7 @@
         <a class="navbar-brand" href="/">
             <img src="{{ asset('assets') }}/images/brand/logo/logo.svg" alt="" />
         </a>
-        
+
         <ul class="navbar-nav flex-column" id="sideNavbar">
             <li class="nav-item">
                 <a class="nav-link has-arrow" href="/">
@@ -36,11 +36,11 @@
                 </li>
             @endcan
 
-            
+
             @can('view-user')
-            <h6 class="navbar-heading text-muted px-3 mt-1">
-                <span>Account</span>
-            </h6>
+                <h6 class="navbar-heading text-muted px-3 mt-1">
+                    <span>Account</span>
+                </h6>
                 <li class="nav-item">
                     <a class="nav-link has-arrow" href="{{ route('admin.users') }}">
                         <i class="fa-solid fa-users nav-icon icon-xs me-2"></i> Users
@@ -56,11 +56,11 @@
                 </li>
             @endcan
 
-            
+
             @role('super-admin')
-            <h6 class="navbar-heading text-muted px-3 mt-1">
-                <span>Middleware</span>
-            </h6>
+                <h6 class="navbar-heading text-muted px-3 mt-1">
+                    <span>PERMISSION</span>
+                </h6>
                 <li class="nav-item">
                     <a class="nav-link has-arrow" href="{{ route('admin.categories.index') }}">
                         <i class="fa-solid fa-list nav-icon icon-xs me-2"></i> Category

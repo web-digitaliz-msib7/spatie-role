@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -83,5 +84,17 @@ class ProductController extends Controller
     {
         $product->delete();
         return to_route('admin.products.index')->with('success', 'Product Deleted Successfully');
+    }
+
+    public function changePublish(Request $request, Product $product)
+    {
+        try {
+            $product->update(['is_published' => $request->is_published]);
+
+            return response()->json(['message' => 'Product Published Status Changed']);
+        } catch (\Throwable $th) {
+            Log::error($th);
+            throw new \Exception('Failed to change product published status');
+        }
     }
 }

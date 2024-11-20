@@ -12,24 +12,41 @@
                 </form>
             </div>
         </div>
-
         <div class="row mt-4">
             @forelse ($products as $product)
-                <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{ $product->getFirstMediaUrl('products') }}" class="card-img-top" style="height: 250px; object-fit: cover;" alt="{{ $product->name }}">
-                        <div class="card-body d-flex flex-column align-items-center">
-                            <h5 class="card-title text-center">{{ $product->name }}</h5>
-                            <p class="card-text text-center">{{ formatCurrency($product->harga) }}</p>
-                            <a href="#" class="btn btn-primary">Beli</a>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <a href="{{ route('products.show', $product->id) }}">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-img-top" style="position: relative; height: 250px; overflow: hidden;">
+                                <img src="{{ $product->getFirstMediaUrl('products') }}"
+                                    style="width: 100%; height: 100%; object-fit: cover;" alt="{{ $product->name }}">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">{{ $product->name }}</h6>
+                                <p class="card-text text-muted" style="font-size: 0.9rem;">
+                                    {{-- {{ Str::limit($product->description, 50, '...') }} --}}
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. A vel quae sit aut
+                                    explicabo
+                                    dicta, ipsa iste fugiat natus asperiores quia, nihil obcaecati veniam et aperiam
+                                    harum
+                                    reprehenderit aliquid debitis?
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <span
+                                        class="text-primary font-weight-bold">{{ formatCurrency($product->harga) }}</span>
+                                    <a href="{{ route('products.order.create', $product->id) }}" class="btn btn-primary">Beli</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @empty
                 <div class="col-12">
-                    <p>Produk belum tersedia</p>
+                    <p class="text-center">Produk belum tersedia</p>
                 </div>
             @endforelse
         </div>
+
+
     </div>
 </x-app-layout>

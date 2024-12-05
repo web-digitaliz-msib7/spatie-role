@@ -1,0 +1,22 @@
+{
+  "resources/js/app.js": {
+    "file": "assets/app-DBdvkBoY.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/plugins/sweetalert2.js": {
+    "file": "assets/sweetalert2-B8E-NhcZ.js",
+    "name": "sweetalert2",
+    "src": "resources/js/plugins/sweetalert2.js",
+    "isEntry": true,
+    "css": [
+      "assets/sweetalert2-CrGVGODa.css"
+    ]
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-D-sv12UV.css",
+    "src": "resources/sass/app.scss",
+    "isEntry": true
+  }
+}

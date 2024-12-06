@@ -14,7 +14,8 @@ class ProductController extends Controller
     public function index()
     {
         $params = request()->query();
-        $products = Product::filter($params)->where('published', '1')->get();
+        $products = Product::all();
+        // filter($params)->where('published', '1')->get();
         return view('user.product.index', compact('products'));
     }
 

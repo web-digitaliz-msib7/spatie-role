@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\OrderController as adminOrderdController;
 use App\Http\Controllers\User\ProductController as UserProductController;
@@ -50,9 +51,8 @@ Route::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('adm
 
     Route::get('/orders', [adminOrderdController::class, 'index'])->name('orders')->middleware('permission:view-order');
 
-    Route::get('/users', function () {
-        return view('admin.user.index');
-    })->name('users')->middleware('permission:view-user');
+
+    Route::get('users', [UserController::class, 'index'])->name('users')->middleware('permission:view-user');
 
     Route::resource('admin-accounts', AdminAccountController::class);
     Route::post('/admin-accounts/{admin_account}/suspend', [AdminAccountController::class, 'suspend'])->name('admin-accounts.suspend');

@@ -20,7 +20,7 @@
                         <path
                             d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                     </svg>
-                    Add Product
+                    Add User
                 </a>
             </div>
         </div>
@@ -29,44 +29,6 @@
                 <!-- card -->
                 <div class="card rounded-2 mx-auto">
                     <div class="d-flex justify-content-between align-items-center p-3">
-                        <form action="" method="get">
-                            <div class="text-dark fw-bold d-flex align-items-center">
-                                <!-- Dropdown Tipe Produk -->
-                                <div class="me-3">
-                                    <select class="form-select" name="product_type" id="productTypeDropdown">
-                                        <option value="">Select Tipe Produk</option>
-                                        <option value="type1">Type 1</option>
-                                        <option value="type2">Type 2</option>
-                                        <option value="type3">Type 3</option>
-                                    </select>
-                                </div>
-
-                                <!-- Dropdown Kategori -->
-                                <div class="me-3">
-                                    <select class="form-select" name="category" id="categoryDropdown">
-                                        <option value="">Select Kategori</option>
-                                        <option value="category1">Category 1</option>
-                                        <option value="category2">Category 2</option>
-                                        <option value="category3">Category 3</option>
-                                    </select>
-                                </div>
-
-                                <!-- Dropdown Level -->
-                                <div class="me-3">
-                                    <select class="form-select" name="level" id="levelDropdown">
-                                        <option value="">Select Level</option>
-                                        <option value="beginner">Beginner</option>
-                                        <option value="intermediate">Intermediate</option>
-                                        <option value="advanced">Advanced</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <button type="submit" class="btn btn-primary">Filter</button>
-                                </div>
-                            </div>
-                        </form>
-
                         <!-- Pencarian -->
                         <form action="" method="GET" class="d-flex">
                             <input type="text" class="form-control" placeholder="Search..." name="search">
@@ -79,54 +41,34 @@
                             <thead class="table-secondary text-dark fw-bold">
                                 <tr>
                                     <th class="col">#</th>
-                                    <th class="col">kode</th>
                                     <th class="col">nama</th>
-                                    <th class="col">qyt</th>
-                                    <th class="col">category</th>
-                                    <th class="col">harga</th>
+                                    <th class="col">email</th>
+                                    <th class="col">role</th>
+                                    <th class="col">aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>PRD001</td>
-                                    <td>Produk A</td>
-                                    <td>10</td>
-                                    <td>Elektronik</td>
-                                    <td>Rp 1,500,000</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>PRD002</td>
-                                    <td>Produk B</td>
-                                    <td>5</td>
-                                    <td>Fashion</td>
-                                    <td>Rp 300,000</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>PRD003</td>
-                                    <td>Produk C</td>
-                                    <td>20</td>
-                                    <td>Kesehatan</td>
-                                    <td>Rp 200,000</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>PRD004</td>
-                                    <td>Produk D</td>
-                                    <td>8</td>
-                                    <td>Peralatan Rumah</td>
-                                    <td>Rp 850,000</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>PRD005</td>
-                                    <td>Produk E</td>
-                                    <td>15</td>
-                                    <td>Kecantikan</td>
-                                    <td>Rp 450,000</td>
-                                </tr>
+                                @forelse ($users as $user)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->roles->first()->name }}</td>
+                                        <td class="d-flex">
+                                            <div class="">
+                                                <a href="" class="btn btn-info btn-sm">Detail</a>
+                                                <a href="" class="btn btn-warning btn-sm">Edit</a>
+
+                                                <form action="" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

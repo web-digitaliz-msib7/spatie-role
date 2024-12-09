@@ -41,6 +41,7 @@ Route::middleware(['auth', 'role:admin|super-admin'])->as('admin.')->prefix('adm
     Route::get('/dashboard', [HomeController::class, 'adminDashboard'])->name('dashboard');
 
     Route::resource('products', AdminProductController::class); // Menggunakan alias untuk membedakan
+    Route::post('/products/{product}/change-publish', [AdminProductController::class, 'changePublish'])->name('products.change-publish');
 
     Route::get('/orders', function () {
         return view('admin.order.index');

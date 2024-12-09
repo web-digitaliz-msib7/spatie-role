@@ -16,10 +16,12 @@ class Product extends Model implements HasMedia
     protected $fillable = [
         'name',
         'harga',
-        'published'
+        'is_published'
     ];
 
-    // protected $guarded = [];
+    protected $casts = [
+        'is_published' => 'boolean'
+    ];
 
     public function publishDescription(): Attribute
     {

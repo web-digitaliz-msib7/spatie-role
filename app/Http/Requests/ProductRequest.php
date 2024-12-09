@@ -24,8 +24,8 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'harga' => 'required|integer',
-            'gambar' => 'file|mimes:jpeg,png,jpg',
-            'published' => 'boolean',
+            'gambar' => 'file|mimes:jpeg,png,jpg|max:2048',
+            'is_published' => 'boolean',
 
         ];
     }

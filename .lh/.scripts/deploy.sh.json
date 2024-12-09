@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".scripts/deploy.sh",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1733728084304,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1733728084304,
+            "name": "Commit-0",
+            "content": "#!/bin/bash\nset -e\n\necho \"Deployment started ...\"\n\n# Enter maintenance mode or return true\n# if already is in maintenance mode\n# (php artisan down) || true\n\n# Pull the latest version of the app\ngit pull origin main\n\n# Install composer dependencies\ncomposer install --no-dev --no-interaction --prefer-dist --optimize-autoloader\n\n# Clear the old cache\n# php artisan clear-compiled\n\n# Recreate cache\n# php artisan optimize\n\n# Compile npm assets\n# npm run build\n\n# Run database migrations\nphp artisan migrate --force\n\n# Exit maintenance mode\n# php artisan up\n\necho \"Deployment finished!\""
+        }
+    ]
+}

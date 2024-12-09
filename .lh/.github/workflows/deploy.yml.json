@@ -1,0 +1,26 @@
+{
+    "sourceFile": ".github/workflows/deploy.yml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1733728112661,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1733728140386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,5 +22,5 @@\n           port: ${{ secrets.SSH_PORT }}\r\n           password: ${{ secrets.SSH_PASSWORD   }}\r\n           # don't forget to run this command for changes folder scripts permission: chmod -R 755 .scripts\r\n           script: |\r\n-            cd /home/digimsib/repositories/laravel-11 && ./.scripts/deploy-breeze.sh\r\n+            cd /home/digimsib/repositories/spatie-role && ./.scripts/deploy-breeze.sh\r\n"
+                },
+                {
+                    "date": 1733728162259,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,5 +22,5 @@\n           port: ${{ secrets.SSH_PORT }}\r\n           password: ${{ secrets.SSH_PASSWORD   }}\r\n           # don't forget to run this command for changes folder scripts permission: chmod -R 755 .scripts\r\n           script: |\r\n-            cd /home/digimsib/repositories/spatie-role && ./.scripts/deploy-breeze.sh\r\n+            cd /home/digimsib/repositories/spatie-role && ./.scripts/deploy.sh\r\n"
+                }
+            ],
+            "date": 1733728112661,
+            "name": "Commit-0",
+            "content": "name: Deploy\r\n\r\n# Trigger the workflow on push and\r\n# pull request events on the breeze branch\r\non:\r\n  push:\r\n    branches:\r\n      - main\r\n\r\n# Authenticate to the the server via ssh\r\n# and run our deployment script\r\njobs:\r\n  deploy:\r\n    runs-on: ubuntu-latest\r\n    steps:\r\n      - uses: actions/checkout@v2\r\n      - name: Deploy to server\r\n        uses: appleboy/ssh-action@master\r\n        with:\r\n          host: ${{ secrets.SSH_HOST }}\r\n          username: ${{ secrets.SSH_USERNAME }}\r\n          port: ${{ secrets.SSH_PORT }}\r\n          password: ${{ secrets.SSH_PASSWORD   }}\r\n          # don't forget to run this command for changes folder scripts permission: chmod -R 755 .scripts\r\n          script: |\r\n            cd /home/digimsib/repositories/laravel-11 && ./.scripts/deploy-breeze.sh\r\n"
+        }
+    ]
+}

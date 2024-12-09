@@ -19,7 +19,7 @@
 
                             <!-- Username -->
                             <div class="mb-3">
-                                <label for="name" class="form-label">User Name</label>
+                                <label for="name" class="form-label">User Ngaran</label>
                                 <input type="text" id="name" class="form-control" name="name"
                                     placeholder="User Name" autocomplete="name" autofocus>
                                 @error('name')
